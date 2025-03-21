@@ -20,7 +20,7 @@ The Viterbi algorithm, a dynamic programming approach, is widely used in computa
 
 SrNo | Name | Faculty or Student | Department| Institute | Email id
 :--|:--|:--|:--|:--|:--|
-1 | Shubham Satish Mahindrakar | Student | Amrita School of Biotechnology | Amrita Vishwa Vidyapeetham | shubhammahindrakar2104@gmail.com
+1 | Kishan Nag M.P | Student | Amrita School of Biotechnology | Amrita Vishwa Vidyapeetham | nagmedapraveenkishan@gmail.com
 2 | Dr. Asha Vijayan | Faculty | Amrita Mind Brain Center | Amrita Vishwa Vidyapeetham | ashavijayan@am.amrita.edu
 3 | Nijin N | Faculty | Amrita Virtual Labs | Amrita Vishwa Vidyapeetham | nijinn@am.amrita.edu
 4 | Rakhi Radhamani | Faculty | Amrita Virtual Labs | Amrita Vishwa Vidyapeetham | rakhir@am.amrita.edu
