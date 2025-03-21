@@ -1,1 +1,1 @@
-## Experiment name
+## Exploring the Viterbi Algorithm for Exon - Intron Prediction
