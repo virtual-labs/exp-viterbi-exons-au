@@ -440,6 +440,22 @@
             box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
         }
 
+        .download-btn.viterbi {
+            background: linear-gradient(145deg, #1E3A5F, #122A45); /* Deep Blue gradient */
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 12px 18px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .download-btn.viterbi:hover {
+            background: linear-gradient(145deg, #172B47, #0E1E33); /* Slightly darker blue */
+        }
+
         .output {
             min-height: 300px;
             margin-top: 20px;
@@ -636,7 +652,7 @@
     <div id="flowchart-modal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('flowchart-modal')">&times;</span>
-            <img src="images\WebTool_InfoGraphic.png" alt="Flowchart Guide">
+            <img src="images\/WebTool_InfoGraphic.png" alt="Flowchart Guide">
         </div>
     </div>
 
@@ -741,14 +757,14 @@
         function handleStep(step, callback) {
             callback(); // Call the respective function (e.g., startAnalysis)
 
-            const buttonIds = ["start-analysis-btn", "forward-backward-btn", "reestimate-btn", "viterbi-btn"];
+            const buttonIds = ["start-analysis-btn", "forward-backward-btn", "reestimate-btn"];
             const buttonColors = ["gen-assumed", "fwd-bwd", "reestimate", "viterbi"]; // Corresponding colors
 
             // 🔹 First, reset all buttons to default state
             buttonIds.forEach((id, index) => {
                 let button = document.getElementById(id);
                 if (button) {
-                    button.classList.remove("enabled", "gen-assumed", "fwd-bwd", "reestimate", "viterbi"); // Remove old styles
+                    button.classList.remove("enabled", "gen-assumed", "fwd-bwd", "reestimate"); // Remove old styles
                     button.disabled = index !== step; // Disable all except the next button
                 }
             });
@@ -1013,8 +1029,9 @@
 
                 document.getElementById('calculationSection').style.display = 'block';
                 document.getElementById('reestimateSection').style.display = 'block';
-                document.getElementById('viterbiSection').style.display = 'block';
-        
+                if (step === 3) {
+                    document.getElementById('viterbiSection').style.display = 'block';
+                }        
             }, 1500);
         }
 
@@ -1249,6 +1266,7 @@
             console.log("Re-estimate button clicked!");
 
             showAlert("Step 3: Re-estimated HMM Parameters.<br><b>Proceed to prediction with Viterbi next.</b>");
+            document.getElementById('viterbiSection').style.display = 'block';
 
             setTimeout(() => {
                 scrollToSection("output");
@@ -1465,7 +1483,11 @@
                 ${graphicalOutput}
                 <p class="viterbi-note">Note: The viterbi algorithm's calculation involves a multi-fold multiplication which results in extremely small values, hence the displayed value is expressed in terms of 'e'.
                 <br> In reality, the number of introns is far more greater than the number of exons. However, this is not shown here as a result of the miniscule data of 5 sequences used.</p>
-            `;
+                `;
+                const downloadButton = `
+                    <button class="download-btn viterbi" onclick="downloadViterbiSVG()">Download Viterbi Output</button>
+                `;
+                viterbiOutput.innerHTML += downloadButton;
 
         }
 
@@ -1514,6 +1536,62 @@
                 document.removeEventListener("mouseup", onMouseUp);
             }
         });
+
+        function downloadViterbiSVG() {
+            const maxCharsPerLine = 60;
+            const lineHeight = 30;
+            const nucleotideSpacing = 18; // Increased spacing for clarity
+
+            const resultText = [...document.querySelectorAll('.viterbi-box')].map(el => ({
+                nucleotide: el.textContent,
+                state: el.classList.contains('exon') ? 'exon' : 'intron'
+            }));
+        
+            if (resultText.length === 0) {
+                alert("No Viterbi result available for download.");
+                return;
+            }
+        
+            const numLines = Math.ceil(resultText.length / maxCharsPerLine);
+            const width = maxCharsPerLine * nucleotideSpacing + 40; // Add padding for aesthetics
+            const height = numLines * lineHeight + 40;
+        
+            let svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" font-family="Courier New, monospace" font-size="20">`;
+            
+            // Background gradient
+            svg += `
+                <defs>
+                    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#f8f8f8; stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#e0e0e0; stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#bgGradient)"/>`;
+            
+            let x = 20, y = 40; // Start with some padding
+            
+            for (let i = 0; i < resultText.length; i++) {
+                const { nucleotide, state } = resultText[i];
+                const color = state === "exon" ? "#228B22" : "#CC0000"; // Exon = green, Intron = red
+            
+                // Plain text without glow effect
+                svg += `<text x="${x}" y="${y}" fill="${color}">${nucleotide}</text>`;
+            
+                x += nucleotideSpacing;
+                if ((i + 1) % maxCharsPerLine === 0) {
+                    x = 20;
+                    y += lineHeight;
+                }
+            }
+        
+            svg += `</svg>`;
+        
+            const blob = new Blob([svg], { type: "image/svg+xml" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "viterbi_output.svg";
+            link.click();
+        }
 
 </script>
 </body>
