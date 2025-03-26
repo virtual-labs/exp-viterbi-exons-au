@@ -136,3 +136,7 @@ P(O) = 0.0375
 Now, we have all the α values:
 
 <img src="images/11.png" title="" />
+
+&nbsp;
+
+####  The Backward Algorithm:
