@@ -2,37 +2,71 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "1. Which of the following is not an assumed parameter(s) in the Viterbi algorithm ?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Initial probabilities",
+        "b": "Transition matrix",
+        "c": "Distance matrix",
+        "d": "Emission matrix"
       },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
-      },
-      "correctAnswer": "a",
+      
+      "correctAnswer": "c",
       "difficulty": "beginner"
     },
+    
+    
     {
-      "question": "This is a Sample Question 2?",
+      "question": "2. What is the role of the Forward Algorithm in an HMM?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Finding the most probable hidden state sequence",
+        "b": "Training the HMM using maximum likelihood estimation",
+        "c": "Compute the probability of an observed sequence given in the model",
+        "d": "Determination of optimal transition probabilities"
       },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
-      },
+      
       "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+  
+
+    {
+      "question": "3. Identify the commonly used algorithm for training HMMs.",
+      "answers": {
+        "a": "Zuker’s algorithm",
+        "b": "Baum-Welch Algorithm",
+        "c": "Fitch-Margolish algorithm",
+        "d": "Backpropagation"
+      },
+      
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+
+
+    {
+      "question": "4. The emission probability refers to",
+      "answers": {
+        "a": "The probability of transitioning from one state to another",
+        "b": "The probability of starting in a particular state",
+        "c": "The probability of observing a particular output given a hidden state",
+        "d": "The probability of the most likely sequence of states"
+      },
+      
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    
+    
+    {
+      "question": "5. Baum-Welch Algorithm is",
+      "answers": {
+        "a": "Expectation-Maximization algorithm",
+        "b": "Forward algorithm",
+        "c": "Brute-force algorithm",
+        "d": "Backward algorithm"
+      },
+      
+      "correctAnswer": "a",
       "difficulty": "beginner"
     }
   ]
