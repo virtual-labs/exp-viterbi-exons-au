@@ -50,3 +50,89 @@ This step traces back the most probable path and finds the most probable sequenc
 Let’s consider a simplistic application of HMM on nucleotide sequences. It is clear that introns always start with GT and end with AG and that GC-rich regions are usually intronic. Based on that, the assumed probabilities would be:
 
 Emission Probabilities (b):
+<img src="images/2.png" title="" />
+
+Transition Probabilities (a):
+<img src="images/3.png" title="" />
+
+Initial Probabilities (π):
+<img src="images/4.png" title="" />
+
+To calculate the Viterbi algorithm, the model must learn these parameters from known data. Here, the Baum Welch algorithm is applied. It first assumes parameters, analyses the data with them, and tweaks the parameters accordingly. The model’s accuracy and precision depend on its being trained with sufficient data.
+
+### Baum-Welch Algorithm:
+It is a variation of the Expectation-maximization algorithm and makes use of results from the Forward and Backward algorithms. Their results are used to re-estimate the parameters as per the data. It reapplies these algorithms and generates parameters repetitively until the generated parameters do not have any significant difference between them.
+
+Let’s consider a sample DNA sequence: "ACTG"
+
+The basic model would look like this:
+
+<img src="images/5.png" title="" />
+
+&nbsp;
+
+
+#### Forward Algorithm:
+(Note- We’ll be using ‘t’ to describe the position of the observable or state)
+
+It consists of three steps-
+
+##### 1.	Initialisation: 
+
+At=1, the observable (O) = A. The Forward probability (α) for the first observable is the product of the corresponding initial probability and emission probability. 
+
+α1-intron = π(intron) × b(A-intron) = 0.8 × 0.4 = 0.32
+
+α1-exon = π(exon) × b(A-exon) = 0.2 × 0.6= 0.12
+
+<img src="images/6.png" title="" />
+
+#### 2.	Recursion:
+At t=2, O=C. For the next part, we’ll be considering the probability of both the previous states and adding them up i.e., For C to be an intron, we consider the transition of A in intron to C in intron and A in exon to C in intron and sum both the probabilities.
+<img src="images/7.png" title="" />
+
+
+As shown in the picture:
+
+α1-intron = 0.32, aintron-intron = 0.7
+
+α1-exon = 0.12, aexon-exon = 0.7
+
+bC-intron = 0.3
+
+α2-intron = α1-intron × aintron-intron × bC-intron + α1-exon × aexon-intron × bC-intron
+
+α2-intron = ((α1-intron × aintron-intron) + (α1-exon × aexon-intron)) × bC-intron
+
+α2-intron = (( 0.32 × 0.7 ) + ( 0.12 × 0.7 )) × 0.3
+
+α2-intron = ( 0.224 + 0.84 ) × 0.3
+
+α2-intron = ( 0.308 ) × 0.3
+
+α2-intron = 0.0924
+
+<img src="images/8.png" title="" />
+
+
+
+Similarly, for α2-exon…
+
+ <img src="images/9.png" title="" />
+
+In the same manner, for the rest of the states:
+
+<img src="images/10.png" title="" />
+
+#### 3.	Termination:
+The total probability for our sequence of observables, P(O) = αT-intron + αT-exon. This is basically, the sum of the α values calculated at the end of the sequence (T denotes last position).
+
+P(O) = α4-intron + α4-exon
+
+P(O) = 0.0215 + 0.0160
+
+P(O) = 0.0375
+
+Now, we have all the α values:
+
+<img src="images/11.png" title="" />
