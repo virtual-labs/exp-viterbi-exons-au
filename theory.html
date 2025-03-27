@@ -1,0 +1,708 @@
+<!DOCTYPE html><html lang="en"><head>
+      <!--Google Tag Manager-->
+      <script class="gtm">
+        var dataLayer = [{
+        'labName': 'Virtual Lab',
+        'discipline': 'Test',
+        'college': 'AMRT',
+        'phase': 'Testing',
+        'expName': 'EXPLORING THE VITERBI ALGORITHM FOR EXON - INTRON PREDICTION',
+        'expShortName': 'viterbi-exons'
+        }];
+    
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-5NMQ9NQ');
+      </script>
+      <!--End Google Tag Manager-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="" name="description">
+    <meta content="" name="author">
+    
+    	<meta name="experiment-short-name" content="viterbi-exons">
+    	<meta name="developer-institute" content="AMRT">
+    	<meta name="learning-unit" content="EXPLORING THE VITERBI ALGORITHM FOR EXON - INTRON PREDICTION">
+    	<meta name="task-name" content="Theory">
+    
+    <!-- For iPhone -->
+    <meta name="msapplication-TileColor" content="#4076e0">
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#4076e0">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#4076e0">
+    <title>Virtual Labs</title>
+    <link rel="shortcut icon" href="./assets/images/favicon.ico">
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css" integrity="sha512-Oy18vBnbSJkXTndr2n6lDMO5NN31UljR8e/ICzVPrGpSud4Gkckb8yUpqhKuUNoE+o9gAb4O/rAxxw1ojyUVzg==" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&amp;family=Raleway&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./assets/css/github-markdown.min.css">
+    <link rel="stylesheet" href="./assets/css/vlabs-style.css">
+    <link rel="stylesheet" href="./assets/css/toast.css">
+    <link rel="stylesheet" href="./assets/katex_assets/katex.min.css">
+    
+    <script src="./assets/js/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+      h1 {
+      font-size: 1.8rem;
+      }
+      h2 {
+      font-size: 1.4rem;
+      }
+      h3 {
+      font-size: 1.2rem;
+      }
+
+      h2, h3 {
+      font-weight: 800;
+      }
+    </style>
+    
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"></head>
+  <body class="p-0 container-fluid vlabs-page d-flex flex-column justify-content-between">
+      <!--Google Tag Manager (noscript)-->
+      <noscript class="gtm">
+        <iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-5NMQ9NQ" style="display:none;visibility:hidden" width="0">
+        </iframe>
+      </noscript>
+      <!--End Google Tag Manager (noscript)-->
+  
+      <header class="vlabs-header sticky-top bg-white">
+        <nav class="p-0 navbar navbar-light d-flex align-items-stretch">
+          
+          <button class="navbar-toggler px-4" type="button" onclick="toggle()">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      
+          <div class="d-flex justify-content-center">        
+            <a href="https://vlab.co.in" class="navbar-brand">
+              <img src="./assets/images/vlabs-color-small-moe.jpg" alt="vlabs logo" class="vlabs-logo">
+            </a>
+          </div>
+          
+          <div id="headerNavbar" class="d-none border-top flex-grow-1 d-lg-flex align-items-center justify-content-end">
+            <div class="svc-rating-display">
+                <rating-display spreadsheetid="1x12nhpp0QvnsA6x-O1sV4IA9SAbfVsq_wiexWkutOmU" sheetname="Experiment-Database" columnname="Experiment Short Name" columnvalue="viterbi-exons" imagesdirectory="/plugins/svc-rating/images/">
+                </rating-display>
+            </div>      <div class="svc-rating-submit">
+                <rating-submit title="Rate" this="" experiment="">
+                </rating-submit>
+            </div>      <bug-report id="bug-report" title="[BUG REPORT] EXPLORING THE VITERBI ALGORITHM FOR EXON - INTRON PREDICTION" page-type="text" context-info="{&quot;organisation&quot;:&quot;Virtual Labs&quot;,&quot;developer_institute&quot;:&quot;AMRT&quot;,&quot;expname&quot;:&quot;EXPLORING THE VITERBI ALGORITHM FOR EXON - INTRON PREDICTION&quot;,&quot;labname&quot;:&quot;Virtual Lab&quot;,&quot;phase&quot;:&quot;Testing&quot;}" checkbox-json="{&quot;text&quot;:[&quot;Insufficient Content&quot;],&quot;video&quot;:[&quot;Insufficient Content&quot;],&quot;assesment&quot;:[&quot;Incorrect Options&quot;,&quot;Incorrect Answer&quot;,&quot;Incorrect Question&quot;],&quot;assessment&quot;:[&quot;Incorrect Options&quot;,&quot;Incorrect Answer&quot;,&quot;Incorrect Question&quot;],&quot;simulation&quot;:[&quot;Simulation Not Working&quot;,&quot;Incorrect Results/Observations&quot;,&quot;Insufficient/Incorrect Instructions&quot;],&quot;DEFAULT&quot;:[&quot;Page Not Loading&quot;,&quot;Content Not Visible&quot;,&quot;Incorrect Content&quot;]}" button_style="border: none; color: #fff; background-color: #288ec8; text-align: center; font-size: 1.05rem; border-radius: 1em;padding: 0.6em 1.2em; margin: 0 10px" position="override" custom_button_class="v-button"></bug-report>
+          </div>
+        </nav>
+      </header>
+      <div class="container-fluid flex-fill d-flex flex-column vlabs-page-main">
+        <div class="row d-flex justify-content-between">
+          <div class="flex-column">
+          <div class="row py-4 px-4 breadcrumbs">
+          	<div class="title is-4 tools">Tools</div>
+          	<span class="mx-2">
+          		<i aria-hidden="true" class="fa fa-angle-right"></i>
+          	</span>
+          	<a href="performance-report.html" class="my-2 mx-3" target="_blank">
+          		<button class="v-button">Performance Tool</button>
+          	</a>
+          	<a href="validator-report.html" class="my-2 mx-3" target="_blank">
+          		<button class="v-button">Validation Tool</button>
+          	</a>
+          </div>
+          </div>
+        </div>
+        <div class="row flex-grow-1 d-flex flex-nowrap flex-column flex-lg-row">
+          <div class="modal fade popupmenu" id="popupMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">
+                              <a href="https://vlab.co.in" class="navbar-brand">
+                                  <img src="./assets/images/vlabs-color-small-moe.jpg" alt="vlabs logo" class="vlabs-logo">
+                              </a>
+                          </h5>
+                          <button type="button" class="btn-close align-self-center" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body nav-menu">
+                              <div>
+                                  <div class="d-flex nav-menu-body">
+                                      <a href="index.html" class="p-2 ">
+                                      Aim
+                                      </a>
+                                      
+                                  </div>
+                                  <div id="t-" class="collapse">
+                                      <div class="px-3 d-flex flex-column tasks align-items-center align-items-lg-start">
+                                      </div>
+                                  </div>
+                              </div>
+                              <div>
+                                  <div class="d-flex nav-menu-body">
+                                      <a href="theory.html" class="p-2  current-item ">
+                                      Theory
+                                      </a>
+                                      
+                                  </div>
+                                  <div id="t-" class="collapse">
+                                      <div class="px-3 d-flex flex-column tasks align-items-center align-items-lg-start">
+                                      </div>
+                                  </div>
+                              </div>
+                              <div>
+                                  <div class="d-flex nav-menu-body">
+                                      <a href="pretest.html" class="p-2 ">
+                                      Pretest
+                                      </a>
+                                      
+                                  </div>
+                                  <div id="t-" class="collapse">
+                                      <div class="px-3 d-flex flex-column tasks align-items-center align-items-lg-start">
+                                      </div>
+                                  </div>
+                              </div>
+                              <div>
+                                  <div class="d-flex nav-menu-body">
+                                      <a href="procedure.html" class="p-2 ">
+                                      Procedure
+                                      </a>
+                                      
+                                  </div>
+                                  <div id="t-" class="collapse">
+                                      <div class="px-3 d-flex flex-column tasks align-items-center align-items-lg-start">
+                                      </div>
+                                  </div>
+                              </div>
+                              <div>
+                                  <div class="d-flex nav-menu-body">
+                                      <a href="simulation.html" class="p-2 ">
+                                      Simulation
+                                      </a>
+                                      
+                                  </div>
+                                  <div id="t-" class="collapse">
+                                      <div class="px-3 d-flex flex-column tasks align-items-center align-items-lg-start">
+                                      </div>
+                                  </div>
+                              </div>
+                              <div>
+                                  <div class="d-flex nav-menu-body">
+                                      <a href="posttest.html" class="p-2 ">
+                                      Posttest
+                                      </a>
+                                      
+                                  </div>
+                                  <div id="t-" class="collapse">
+                                      <div class="px-3 d-flex flex-column tasks align-items-center align-items-lg-start">
+                                      </div>
+                                  </div>
+                              </div>
+                              <div>
+                                  <div class="d-flex nav-menu-body">
+                                      <a href="references.html" class="p-2 ">
+                                      References
+                                      </a>
+                                      
+                                  </div>
+                                  <div id="t-" class="collapse">
+                                      <div class="px-3 d-flex flex-column tasks align-items-center align-items-lg-start">
+                                      </div>
+                                  </div>
+                              </div>
+                              <div>
+                                  <div class="d-flex nav-menu-body">
+                                      <a href="contributors.html" class="p-2 ">
+                                      Contributors
+                                      </a>
+                                      
+                                  </div>
+                                  <div id="t-" class="collapse">
+                                      <div class="px-3 d-flex flex-column tasks align-items-center align-items-lg-start">
+                                      </div>
+                                  </div>
+                              </div>
+                              <div>
+                                  <div class="d-flex nav-menu-body">
+                                      <a href="feedback.html" class="p-2 ">
+                                      Feedback
+                                      </a>
+                                      
+                                  </div>
+                                  <div id="t-" class="collapse">
+                                      <div class="px-3 d-flex flex-column tasks align-items-center align-items-lg-start">
+                                      </div>
+                                  </div>
+                              </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="nav flex-column sidebar nav-menu flex-shrink-0 px-lg-4 align-items-center align-items-lg-start hidden d-none d-lg-flex" id="menu">
+                <div>
+                    <div class="d-flex nav-menu-body">
+                        <a href="index.html" class="p-2 ">
+                        Aim
+                        </a>
+                        
+                    </div>
+                    <div id="t-" class="collapse">
+                        <div class="px-3 d-flex flex-column tasks align-items-center align-items-lg-start">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="d-flex nav-menu-body">
+                        <a href="theory.html" class="p-2  current-item ">
+                        Theory
+                        </a>
+                        
+                    </div>
+                    <div id="t-" class="collapse">
+                        <div class="px-3 d-flex flex-column tasks align-items-center align-items-lg-start">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="d-flex nav-menu-body">
+                        <a href="pretest.html" class="p-2 ">
+                        Pretest
+                        </a>
+                        
+                    </div>
+                    <div id="t-" class="collapse">
+                        <div class="px-3 d-flex flex-column tasks align-items-center align-items-lg-start">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="d-flex nav-menu-body">
+                        <a href="procedure.html" class="p-2 ">
+                        Procedure
+                        </a>
+                        
+                    </div>
+                    <div id="t-" class="collapse">
+                        <div class="px-3 d-flex flex-column tasks align-items-center align-items-lg-start">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="d-flex nav-menu-body">
+                        <a href="simulation.html" class="p-2 ">
+                        Simulation
+                        </a>
+                        
+                    </div>
+                    <div id="t-" class="collapse">
+                        <div class="px-3 d-flex flex-column tasks align-items-center align-items-lg-start">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="d-flex nav-menu-body">
+                        <a href="posttest.html" class="p-2 ">
+                        Posttest
+                        </a>
+                        
+                    </div>
+                    <div id="t-" class="collapse">
+                        <div class="px-3 d-flex flex-column tasks align-items-center align-items-lg-start">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="d-flex nav-menu-body">
+                        <a href="references.html" class="p-2 ">
+                        References
+                        </a>
+                        
+                    </div>
+                    <div id="t-" class="collapse">
+                        <div class="px-3 d-flex flex-column tasks align-items-center align-items-lg-start">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="d-flex nav-menu-body">
+                        <a href="contributors.html" class="p-2 ">
+                        Contributors
+                        </a>
+                        
+                    </div>
+                    <div id="t-" class="collapse">
+                        <div class="px-3 d-flex flex-column tasks align-items-center align-items-lg-start">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="d-flex nav-menu-body">
+                        <a href="feedback.html" class="p-2 ">
+                        Feedback
+                        </a>
+                        
+                    </div>
+                    <div id="t-" class="collapse">
+                        <div class="px-3 d-flex flex-column tasks align-items-center align-items-lg-start">
+                        </div>
+                    </div>
+                </div>
+          </div>          <div class="vlabs-page-content px-5 pb-4 flex-grow-1 markdown-body">
+            <div class="text-center fix-spacing">
+              <h2 id="exploring-the-viterbi-algorithm-for-exon---intron-prediction">Exploring the Viterbi Algorithm for Exon - Intron Prediction</h2>
+          
+            </div>
+              <h3 id="introduction">Introduction</h3>
+          <p>With the completion of numerous genome sequencing projects, a vast amount of sequence data has been generated, which is applicable for various studies in biotechnology, healthcare, and evolutionary studies. The sequenced data contains valuable information for understanding various biological functions in cells. The huge size of the genomic data poses difficulty in analysing them without computational approaches. The computational methods efficiently analyze the data by processing, organizing, and interpreting the data with applicable mathematical principles. The expansion of newly sequenced genomes and the need for genome re-sequencing in genomics-based projects demanded computational tools in biological sequence analysis. By implementing algorithms, statistical models, and machine learning applications, the researchers can identify patterns and correlations, predict gene functions, find significant biological markers within the sequence data, and understand evolutionary relationships. Various algorithms have been used for biological sequence analysis.  Hidden Markov models (HMM) are well-known probabilistic models for analyzing biological sequences by profiling functional protein families and identifying functional domains. The Viterbi Algorithm is a dynamic programming solution for finding the most probable hidden state sequence in the Hidden Markov Models (HMM). The Viterbi algorithm requires a basic understanding of HMM model parameters for finding the maximum probability among all possible state sequences.</p>
+          <h3 id="theory">Theory</h3>
+          <p> DNA is organized into discrete functional units known as genes. The genes are composed of deoxyribonucleic acid (DNA), except in some viruses, which consist of ribonucleic acid (RNA). The structure of DNA is a double helix composed of two chains of nucleotides that wind about each other to resemble a twisted ladder. The outer sides of the double helix are made up of sugars and phosphates, and the inside molecule is made up of the nucleotide bases adenine (A), thymine (T), guanine (G), and cytosine (C). An A on one chain bonds with T on the other, forming an A=T bond; similarly, a C on one chain bonds to a G on the other, forming G=C. The two strands separate during replication, and each serves as a template for the synthesis of a new complementary strand. Each gene is a segment of DNA that gives rise to a protein product or RNA. DNA replication is the biological process in which a double-stranded DNA molecule is copied, producing two identical copies of DNA from one original DNA molecule with the help of the enzyme DNA polymerase. The next step is the process of copying genetic information from DNA into messenger RNA (mRNA), known as transcription. During this step, the enzyme RNA polymerase binds to DNA and synthesizes a complementary RNA strand (mRNA), which carries genetic information from the DNA to the ribosomes. It occurs in the nucleus (in eukaryotic cells) or the cytoplasm (in prokaryotic cells). During translation, this mRNA sequence is translated into a specific protein. The transfer RNA (tRNA) molecules in the ribosomes bring amino acids that match the mRNA sequence, and the ribosomal RNA (rRNA) catalyzes peptide bond formation between amino acids. The genetic code, read in triplets (codons), determines the sequence of amino acids in the protein. This flow of genetic information, DNA → RNA → Protein, within a biological system explains the central dogma of molecular biology.</p>
+          <p>The gene structure has coding and non-coding regions that regulate its expression. A promoter region is a DNA sequence where RNA polymerase binds to initiate transcription. Most protein-coding genes in the human genome consist of nucleotide sequences, exons, and introns. Intron is a region that resides within a gene but does not remain in the final maturation of mRNA molecule. It is generally described as non-coding sequences (does not code for amino acids) that are transcribed but spliced out before translation. Exons represent the coding sequences that code for the amino acid sequence of the protein (Figure 1). The Chambons rule (GT-AG rule) states that most introns start with GT at the 5' end and AG at the 3' end. The transcription termination sequence represents a specific DNA sequence that functions at the end of transcription and releases a newly synthesized RNA molecule. In prokaryotes, rho-dependent or rho-independent mechanisms were involved in termination, while polyadenylation signals (AAUAAA) are common in eukaryotes. The untranslated regions (UTRs) represent mRNA sequences that are transcribed from DNA and not translated into proteins. 5' UTR found before the start codon AUG and helps in translation regulation. 3' UTR located after the stop codon (UAA, UGA, UAG) functions in providing mRNA stability and transport.</p>
+          <img src="images/1.png" title="">
+          
+          <p>Figure 1. Structure of a gene</p>
+          <p>(Image source: <a href="https://www.genomicseducation.hee.nhs.uk/genotes/knowledge-hub/gene/">https://www.genomicseducation.hee.nhs.uk/genotes/knowledge-hub/gene/</a>) </p>
+          <p>&nbsp;</p>
+          <p>One of the most challenging and intriguing problems in computational biology and bioinformatics is the identification of genes within DNA sequences. Finding genes involves identifying biologically functional nucleotide sequence stretches in the genomic DNA. Computational approaches of gene finding depend on using algorithms to locate protein-coding genes. Hidden Markov Models are widely used computational tools in bioinformatics that allow for the analysis of biological sequences for extracting meaningful information. This statistical model represents systems with hidden (unobservable) states and observable outputs. In biology, HMMs are powerful tools for analyzing genes, proteins, and evolutionary relationships by detecting patterns in biological sequences. With the advancing sequencing technologies and vast sequence data, HMMs will continue to play a crucial role in genomic research.</p>
+          <h4 id="viterbi-algorithm-in-the-context-of-hidden-markov-models-for-exon-intron-prediction">Viterbi algorithm in the context of Hidden Markov Models for exon-intron prediction</h4>
+          <p>The Viterbi algorithm is dynamic programming that determines the optimal state path in the HMM, emitting the given sequence with the maximum probability. The HMM has two main entities, observables and hidden states. Observables are the elements seen by the user, but the hidden states are unknown and inferred based on the observables and their patterns. In the case of nucleotide sequence, the observables are individual bases while the hidden states would be introns and exons. That is, in case of sequence analysis, the Viterbi algorithm can be used for predicting coding and non-coding sequences. Similarly, for protein sequences, the observables would be the amino acids, and the states could be motifs and patterns. The three parameters that link the hidden and observable patterns are emission probabilities, transition probabilities, and initial probabilities. In case of gene finding, HMM includes states that represent different regions of a gene, such as the "start codon," "exon," "intron," and "stop codon." Each state specifies distinct probabilities of emitting specific nucleotide sequences. </p>
+          <p>•    Emission probabilities: The probability of observing a hidden state from an observable, or in other words, the probability of a hidden state emitting an observable is the emission probability, represented by b.</p>
+          <p>•    Transition probabilities: The probability of transitioning from one hidden state to another is the transition probability, represented by a.</p>
+          <p>•    Initial probabilities: The probability of the first observable that is generated by a specific hidden state is called the initial probability, represented by π.</p>
+          <h3 id="viterbi-algorithm-for-exon-intron-prediction">Viterbi Algorithm for Exon-Intron Prediction</h3>
+          <p>The Viterbi algorithm was proposed by Andrew Viterbi in 1967, which remains as an efficient algorithm for sequence-based probabilistic modelling. In gene prediction, the Viterbi algorithm predict whether each nucleotide in a DNA sequence belongs to an exon (coding region) or an intron (non-coding region).</p>
+          <p>It works as follows:</p>
+          <h4 id="step-1-initialization">Step 1: Initialization</h4>
+          <p>During initialization, the algorithm set initial probabilities for all states in the Hidden Markov Model (HMM). </p>
+          <h4 id="step-2-recursion">Step 2: Recursion</h4>
+          <p>This step computes the most probable paths for each state at each time step using Transition probabilities (from previous states to the current state) and Emission probabilities (likelihood of observing the current symbol from the current state). </p>
+          <h4 id="step-3-termination">Step 3: Termination</h4>
+          <p>This identifies the final most probable state. This calculates the overall probability of the most likely state sequence. This step prepares for the backtracking to reconstruct the full state sequence.</p>
+          <h4 id="step-4-backtracking">Step 4: Backtracking</h4>
+          <p>This step traces back the most probable path and finds the most probable sequence of hidden states. </p>
+          <h4 id="example-of-hmm-model">Example of HMM model</h4>
+          <p>Let’s consider a simplistic application of HMM on nucleotide sequences. It is clear that introns always start with GT and end with AG and that GC-rich regions are usually intronic. Based on that, the assumed probabilities would be:</p>
+          <p>Emission Probabilities (b):
+          <img src="images/2.png" title=""></p>
+          <p>Transition Probabilities (a):
+          <img src="images/3.png" title=""></p>
+          <p>Initial Probabilities (π):
+          <img src="images/4.png" title=""></p>
+          <p>To calculate the Viterbi algorithm, the model must learn these parameters from known data. Here, the Baum Welch algorithm is applied. It first assumes parameters, analyses the data with them, and tweaks the parameters accordingly. The model’s accuracy and precision depend on its being trained with sufficient data.</p>
+          <h3 id="baum-welch-algorithm">Baum-Welch Algorithm:</h3>
+          <p>It is a variation of the Expectation-maximization algorithm and makes use of results from the Forward and Backward algorithms. Their results are used to re-estimate the parameters as per the data. It reapplies these algorithms and generates parameters repetitively until the generated parameters do not have any significant difference between them.</p>
+          <p>Let’s consider a sample DNA sequence: "ACTG"</p>
+          <p>The basic model would look like this:</p>
+          <img src="images/5.png" title="">
+          
+          <p>&nbsp;</p>
+          <h4 id="forward-algorithm">Forward Algorithm:</h4>
+          <p>(Note- We’ll be using ‘t’ to describe the position of the observable or state)</p>
+          <p>It consists of three steps-</p>
+          <h5 id="1----initialisation">1.    Initialisation:</h5>
+          <p>At=1, the observable (O) = A. The Forward probability (α) for the first observable is the product of the corresponding initial probability and emission probability. </p>
+          <p>α1-intron = π(intron) × b(A-intron) = 0.8 × 0.4 = 0.32</p>
+          <p>α1-exon = π(exon) × b(A-exon) = 0.2 × 0.6= 0.12</p>
+          <img src="images/6.png" title="">
+          
+          <h5 id="2----recursion">2.    Recursion:</h5>
+          <p>At t=2, O=C. For the next part, we’ll be considering the probability of both the previous states and adding them up i.e., For C to be an intron, we consider the transition of A in intron to C in intron and A in exon to C in intron and sum both the probabilities.</p>
+          <img src="images/7.png" title="">
+          
+          
+          <p>As shown in the picture:</p>
+          <p>α1-intron = 0.32, aintron-intron = 0.7</p>
+          <p>α1-exon = 0.12, aexon-exon = 0.7</p>
+          <p>bC-intron = 0.3</p>
+          <p>α2-intron = α1-intron × aintron-intron × bC-intron + α1-exon × aexon-intron × bC-intron</p>
+          <p>α2-intron = ((α1-intron × aintron-intron) + (α1-exon × aexon-intron)) × bC-intron</p>
+          <p>α2-intron = (( 0.32 × 0.7 ) + ( 0.12 × 0.7 )) × 0.3</p>
+          <p>α2-intron = ( 0.224 + 0.84 ) × 0.3</p>
+          <p>α2-intron = ( 0.308 ) × 0.3</p>
+          <p>α2-intron = 0.0924</p>
+          <img src="images/8.png" title="">
+          
+          
+          <p>&nbsp;</p>
+          <p>Similarly, for α2-exon…</p>
+           <img src="images/9.png" title="">
+          
+          <p>&nbsp;</p>
+          <p>In the same manner, for the rest of the states:</p>
+          <img src="images/10.png" title="">
+          
+          <p>&nbsp;</p>
+          <h5 id="3----termination">3.    Termination:</h5>
+          <p>The total probability for our sequence of observables, P(O) = αT-intron + αT-exon. This is basically, the sum of the α values calculated at the end of the sequence (T denotes last position).</p>
+          <p>P(O) = α4-intron + α4-exon</p>
+          <p>P(O) = 0.0215 + 0.0160</p>
+          <p>P(O) = 0.0375</p>
+          <p>Now, we have all the α values:</p>
+          <img src="images/11.png" title="">
+          
+          <p>&nbsp;</p>
+          <h4 id="the-backward-algorithm">The Backward Algorithm:</h4>
+          <p>As the name suggests, start from the end to the back i.e., from t=4 to t=1. The initialisation case here is a lot simpler but the recursion step varies from of the forward algorithm. It also consists of two steps.</p>
+          <h5 id="1----initialisation-1">1.    Initialisation:</h5>
+          <p>At t = 5, O = G and the initial β values for both states are set to 1.</p>
+          <img src="images/12.png" title="">
+          
+          <p>&nbsp;</p>
+          <h5 id="2----recursion-1">2.    Recursion:</h5>
+          <p>Here, start the backtracking the probability values. The β value will also be considered from both the β values of the successive state which is multiplied with its respective emission probability and transition probability from current to succeeding state. Then, both the probability products are added up.</p>
+          <p>For t=4:</p>
+          <img src="images/13.png" title="">
+          
+          <p>&nbsp;</p>
+          <p>As shown in the picture:</p>
+          <p>β5-intron = 1, aintron-intron = 0.3, bG-intron = 0.6</p>
+          <p>β5-exon = 1, aintron-exon = 0.7, bG-exon = 0.4</p>
+          <p>Note- Although the algorithm is backtracking, we are considering transition probabilities from t to t+1 and the emission probabilities are for t+1 and are thus different in both cases.</p>
+          <p>β4-intron = ( β5-intron × aintron-intron × bG-intron ) + ( β5-exon × aintron-exon × bG-exon )</p>
+          <p>β4-intron = ( 1 × 0.3 × 0.6 ) + ( 1 × 0.7 × 0.4 )</p>
+          <p>β4-intron = ( 0.18 ) + ( 0.28 )</p>
+          <p>β4-intron = 0.46</p>
+          <p>&nbsp;</p>
+          <p>Similarly, for β4-exon:</p>
+          <img src="images/14.png" title="">
+          
+          <p>&nbsp;</p>
+          <p>The β values are calculated in the same manner, recursively for all the positions:</p>
+          <img src="images/15.png" title="">
+          
+          <p>&nbsp;</p>
+          <p>Now, a summation table of all the α and β values:</p>
+          <img src="images/16.png" title="">
+          
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <h3 id="baum-welch-algorithm-1">Baum Welch Algorithm:</h3>
+          <p>Now, using α and β values we calculate the state probabilities (γt-state), transition probabilities (εstate(t)-state(t+1)). With these two parameters, we re-estimate our parameters.</p>
+          <p>Note- The transition probability first calculated in this step, ε is different from our parameter of transition probability, b. ε is a precursor value used in the calculation of b.</p>
+          <h5 id="1----calculation-of-state-probabilities-γt-state">1.    Calculation of State probabilities (γt-state):</h5>
+          <p>This value is obtained by dividing the product of the corresponding α and β values by the total probability.</p>
+          <p>&nbsp;</p>
+          <p>For example:</p>
+          <p>γ1-intron = (α1-intron × β1-intron) / P(O)</p>
+          <p>γ1-intron = (0.32 × 0.1079) / 0.0375</p>
+          <p>γ1-intron = 0.0345/0.0375</p>
+          <p>γ1-intron = 0.9207</p>
+          <p>&nbsp;</p>
+          <p>Similarly for γ1-exon:</p>
+          <p>γ1-exon = (α1-exon × β1-exon) / P(O)</p>
+          <p>γ1-exon = (0.12 × 0.1620) / 0.0375</p>
+          <p>γ1-exon = 0.0194/0.0375</p>
+          <p>γ1-exon = 0.5184</p>
+          <p>&nbsp;</p>
+          <p>The γt-state values for the states of all the positions: </p>
+          <img src="images/17.png" title="">
+          
+          <p>&nbsp;</p>
+          <h5 id="2----calculation-of-transition-probabilities-εstatet-statet1">2.    Calculation of Transition Probabilities (εstate(t)-state(t+1)):</h5>
+          <p>These values are calculated for each state. The product of the corresponding (position=t) forward (αt), backward (βt), transition (astate(t)-state(t+1)), emission (bO(t+1)-state(t+1)) is divided by the total probability P(O).</p>
+          <p>Keep in mind that for each position, there are 4 transitions:</p>
+          <p>•    Intron-intron</p>
+          <p>•    Intron-exon</p>
+          <p>•    Exon-intron</p>
+          <p>•    Exon-exon</p>
+          <p>Importantly, ε values are calculated only until t=T-1 (last second position) since we are using the emission probabilities of the succeeding state.</p>
+          <p>For ε at t=1:</p>
+          <p>O1 = A, Ot+1 = C</p>
+          <p>α1-intron = 0.32, β1-intron = 0.1079</p>
+          <p>α1-exon = 0.12, β1-exon = 0.1620</p>
+          <p>P(O) = 0.0375</p>
+          <p>&nbsp;</p>
+          <h6 id="----intron-intron">•    intron-intron:</h6>
+          <p>aintron-intron = 0.7, b(C-intron) = 0.3</p>
+          <p>ε1(i-i) = ( α1-intron × β1-intron × aintron-intron × b(C-intron) ) / P(O)</p>
+          <p>ε1(i-i) = ( 0.32 × 0.1079 × 0.7 × 0.3 ) / 0.0375</p>
+          <p>ε1(i-i) =  0.0072/ 0.0375</p>
+          <p>ε1(i-i) =  0.192</p>
+          <p>&nbsp;</p>
+          <h6 id="----intron-exon">•    intron-exon:</h6>
+          <p>aintron-exon = 0.3, b(C-exon) = 0.7</p>
+          <p>ε1(i-e) = ( α1-intron × β1-intron × aintron-exon × b(C-exon) ) / P(O)</p>
+          <p>ε1(i-e) = ( 0.32 × 0.1079 × 0.3 × 0.7 ) / 0.0375</p>
+          <p>ε1(i-e) = 0.0072/ 0.0375</p>
+          <p>ε1(i-e) = 0.192</p>
+          <p>&nbsp;</p>
+          <h6 id="----exon-intron">•    exon-intron:</h6>
+          <p>aexon-intron = 0.45, b(C-intron) = 0.3</p>
+          <p>ε1(e-i) = ( α1-exon × β1-exon × aexon-intron × b(C-intron) ) / P(O)</p>
+          <p>ε1(e-i) = ( 0.12 × 0.1620 × 0.45 × 0.3 ) / 0.0375</p>
+          <p>ε1(e-i) = 0.0026 / 0.0375</p>
+          <p>ε1(e-i) = 0.0693</p>
+          <p>&nbsp;</p>
+          <h6 id="----exon-exon">•    exon-exon:</h6>
+          <p>aexon-exon = 0.65, b(C-exon) = 0.7</p>
+          <p>ε1(e-e) = ( α1-exon × β1-exon × aexon-itron × b(C-intron) ) / P(O)</p>
+          <p>ε1(e-e) = ( 0.12 × 0.1620 × 0.65 × 0.7 ) / 0.0375</p>
+          <p>ε1(e-e) = 0.0088/0.0375</p>
+          <p>ε1(e-e) = 0.2347</p>
+          <p>&nbsp;</p>
+          <p>It is calculated in the same manner for all positions:</p>
+          <img src="images/18.png" title="">
+          
+          <p>&nbsp;</p>
+          <h4 id="calculation-of-parameters">Calculation of Parameters:</h4>
+          <h5 id="1----transition-parameters">1.    Transition Parameters:</h5>
+          <p>Re-estimation for this step is done for each kind of transition (eg., intron-intron, exon-intron etc.) For each kind of transition, the summation of transition probabilities is divided by summation of the γt value of the state at t. But note that here, the summation is done only until t=T-1 because transition probabilities cannot be calculated for the last position as there is no transition.</p>
+          <p>&nbsp;</p>
+          <p>For example,</p>
+          <p>For intron-intron:</p>
+          <p>ε1(i-i) = 0.192, ε2(i-i) = 0.1547, ε3(i-i) = 0.1819</p>
+          <p>γ1-i = 0.9207, γ2-i = 0.5224, γ3-i = 0.433</p>
+          <p>a(intron-intron) = (ε1(i-i) + ε2(i-i) + ε3(i-i)) / (γ1-i + γ2-i + γ3-i)</p>
+          <p>a(intron-intron) = (0.192 + 0.1547 + 0.1819) / (0.9207 + 0.5524 + 0.433)</p>
+          <p>a(intron-intron) = 0.5286 / 1.861</p>
+          <p>a(intron-intron) = 0.284</p>
+          <p>&nbsp;</p>
+          <p>Similarly, all re-estimated state transition parameters are:</p>
+          <img src="images/19.png" title="">
+          
+          <p>&nbsp;</p>
+          <h5 id="2----emission-parameters">2.    Emission Parameters:</h5>
+          <p>Here, we are calculating the emission of a particular observable by a particular state. This is also a fraction where the numerator is the summation of all γ values of state i which are considered only if the observable is O. The denominator is the summation of all γ values of state i.</p>
+          <p>For (Intron, A):</p>
+          <p>b(A-intron) = Σ (if O=A)(γt-intron) / Σ γt-intron
+          Since we have taken a simple sequence, the we have only one γt-intron value where O=A. The denominator, is the sum of all γt-intron values regardless of what O is.</p>
+          <p>b(A-intron) = 0.9207 / 0.9207 + 0.5524 + 0.433 + 0.5733</p>
+          <p>b(A-intron) = 0.9207 / 2.4794</p>
+          <p>b(A-intron) = 0.3713</p>
+          <p>&nbsp;</p>
+          <p>Similarly, all re-estimated emission parameters are:</p>
+          <img src="images/20.png" title="">
+          
+          <p>&nbsp;</p>
+          <p>Thus, we have our re-estimated parameters. And the calculations show why we need a large data set to make our model accurate and precise.</p>
+          <p>Now for the last part. Having learnt the parameters from known data, how will the model use these parameters to classify new or unknown data? For this, we use the Viterbi algorithm.</p>
+          <p>Given a sequence of observables, there are multiple combinations of hidden states that it can take. But not all of them would have a considerable probability. And while multiplying the probabilities their values go so low that anything other than the maximum probability seems insignificant. That is the working principle of the Viterbi algorithm (values are represented by δ). It calculates the combination with the maximum probability by eliminating states of lesser probability.</p>
+          <p>&nbsp;</p>
+          <p>Consider an example of AGTC for this:</p>
+          <h5 id="1----initialization">1.    Initialization:</h5>
+          <p>This is the same as in the case of the Forward algorithm, δ1 will be the product of the initial probability and the emission probability. </p>
+          <p>δ1-intron = πintron × bA-intron</p>
+          <p>δ1-intron = 0.8 × 0.3713</p>
+          <p>δ1-intron = 0.297</p>
+          <p>δ1-exon = πexon × bA-exon</p>
+          <p>δ1-exon = 0.2 × 0.3054</p>
+          <p>δ1-exon = 0.0611</p>
+          <img src="images/22.png" title="">
+          
+          <p>&nbsp;</p>
+          <h5 id="2----recursion-2">2.    Recursion:</h5>
+          <p>Here, the basic formula is the same of the forward algorithm but we do not add up the values from two different states. Instead, we only consider the one with the maximum value and go ahead.</p>
+          <p>δ2-intron = max[δ1-intron × aintron-intron, δ1-exon × aexon-intron] × bG-intron</p>
+          <p>δ2-intron = max[0.297 × 0.284, 0.0611 × 0.1858] × 0.2312</p>
+          <p>δ2-intron = max[0.0843, 0.0114] × 0.2312</p>
+          <p>&nbsp;</p>
+          <p>Since the max of them both is 0.0843, we go ahead with that and ignore 0.0114</p>
+          <p>δ2-intron = 0.0843 × 0.2312</p>
+          <p>δ2-intron = 0.0195</p>
+          <img src="images/23.png" title="">
+          
+          <p>&nbsp;</p>
+          <p>Similarly, we calculate δ2-exon:</p>
+          <p>δ2-exon = max[δ1-intron × aintron-exon, δ1-exon × aexon-exon] × bG-exon</p>
+          <p>δ2-exon = max[0.297 × 0.2537, 0.0611 × 0.38] × 0.2374</p>
+          <p>δ2-exon = max[0.0753,0.0232] × 0.2374</p>
+          <p>δ2-exon = 0.0753 × 0.2374</p>
+          <p>δ2-exon = 0.0179</p>
+          <img src="images/24.png" title="">
+          
+          <p>&nbsp;</p>
+          <p>We calculate all the δ values for all positions the same way.
+          Note- it is important to keep track of which state’s value has been selected for backtracking.</p>
+          <img src="images/25.png" title="">
+          
+          <p>&nbsp;</p>
+          <h5 id="3----termination-1">3.    Termination:</h5>
+          <p>After calculating the δ values for t=T (last position), we choose the higher probability.</p>
+          <p>In this case,</p>
+          <p>δ4-intron = 3.6728 × 10-4</p>
+          <p>δ4-exon = 1.3367 × 10-4</p>
+          <p>Since δ4-intron is higher, we choose this as our final state.</p>
+          <p>&nbsp;</p>
+          <h5 id="4----backtracking">4.    Backtracking:</h5>
+          <p>Making use of the red arrows which represent where the maximum value was chosen from for calculation, we backtrack from the final position to the initial position, taking note of the states.</p>
+          <img src="images/26.png" title="">
+          
+          <p>&nbsp;</p>
+          <h3 id="applications-of-viterbi-algorithm">Applications of Viterbi algorithm</h3>
+          <p>•    In bioinformatics and computational biology, Viterbi algorithm is important for sequence analysis and biological pattern recognition.</p>
+          <p>•    HMM model helps in predicting coding and non-coding regions of genes, RNA structure prediction, transcription factor binding site detection, and splice site prediction. </p>
+          <p>•    It is widely used in automatic speech recognition (ASR) and natural language processing (NLP)</p>
+          <p>•    It has wide applications in Robotics and AI to understand sequences of actions and detect patterns. </p>
+          
+          </div>
+          <div class="bug-report-mobile">
+              <bug-report id="bug-report" title="[BUG REPORT] EXPLORING THE VITERBI ALGORITHM FOR EXON - INTRON PREDICTION" page-type="text" context-info="{&quot;organisation&quot;:&quot;Virtual Labs&quot;,&quot;developer_institute&quot;:&quot;AMRT&quot;,&quot;expname&quot;:&quot;EXPLORING THE VITERBI ALGORITHM FOR EXON - INTRON PREDICTION&quot;,&quot;labname&quot;:&quot;Virtual Lab&quot;,&quot;phase&quot;:&quot;Testing&quot;}" checkbox-json="{&quot;text&quot;:[&quot;Insufficient Content&quot;],&quot;video&quot;:[&quot;Insufficient Content&quot;],&quot;assesment&quot;:[&quot;Incorrect Options&quot;,&quot;Incorrect Answer&quot;,&quot;Incorrect Question&quot;],&quot;assessment&quot;:[&quot;Incorrect Options&quot;,&quot;Incorrect Answer&quot;,&quot;Incorrect Question&quot;],&quot;simulation&quot;:[&quot;Simulation Not Working&quot;,&quot;Incorrect Results/Observations&quot;,&quot;Insufficient/Incorrect Instructions&quot;],&quot;DEFAULT&quot;:[&quot;Page Not Loading&quot;,&quot;Content Not Visible&quot;,&quot;Incorrect Content&quot;]}" position="override" button_style="
+                          position: fixed; 
+                          bottom: 20px;
+                          right: 20px;
+                          z-index: 1;
+                          font-size: 0;
+                          padding: 25px;
+                          border-radius: 50%;
+                          border: none;
+                          background-color: #0fc0ff;
+                          background-image: url(data:image/png;base64,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);
+                          background-repeat: no-repeat;
+                          background-position: center;
+                          background-size: 30px;
+                          filter: invert(1);">
+              </bug-report>
+          </div>        </div>
+      </div>
+      <footer class="text-light pt-2 vlabs-footer d-flex flex-column">
+        <div class="row px-5 mx-0">
+          <div class="col d-flex flex-column">
+            <span class="font-weight-bold vlabs-footer-sect-name pb-2 mb-3">Community Links</span>
+            <a href="https://www.sakshat.ac.in/" class="text-light">Sakshat Portal</a>
+            <a href="http://outreach.vlabs.ac.in/" class="text-light">Outreach Portal</a>
+            <a href="https://vlab.co.in/faq" class="text-light">FAQ: Virtual Labs</a>
+          </div>
+          <div class="col d-flex flex-column">
+            <span class="font-weight-bold vlabs-footer-sect-name pb-2 mb-3">Contact Us</span>
+            <span> Phone: General Information: 011-26582050 </span>
+            <span> Email: support@vlabs.ac.in </span>
+          </div>
+          <div class="col d-flex flex-column">
+            <span class="font-weight-bold vlabs-footer-sect-name pb-2 mb-3">Follow Us</span>
+            <div class="social-links">
+      	<a class="p-2 mt-1 mr-2 d-inline-flex justify-content-center align-items-center" style="background: #55acee;" href="https://twitter.com/TheVirtualLabs">
+      	  <i class="fab fa-twitter"></i>
+      	</a>
+      	<a class="p-2 mt-1 mr-2 d-inline-flex justify-content-center align-items-center" style="background: #3b5998;" href="https://www.facebook.com/Virtual-Labs-IIT-Delhi-301510159983871/">
+      	  <i class="fab fa-facebook"></i>
+      	</a>
+      	<a class="p-2 mt-1 mr-2 d-inline-flex justify-content-center align-items-center" style="background: #e52d27;" href="https://www.youtube.com/watch?v=asxRaOgk6a0">
+      	  <i class="fab fa-youtube"></i>
+      	</a>
+      	<a class="p-2 mt-1 mr-2 d-inline-flex justify-content-center align-items-center" style="background: #2867B2;" href="https://in.linkedin.com/in/virtual-labs-008ba9136">
+      	  <i class="fab fa-linkedin"></i>
+      	</a>
+            </div>
+          </div>
+        </div>
+        <div class="m-0 py-2 text-center" style="font-family: &quot;Open Sans&quot;, sans-serif; background: #212121;">
+          <a class="text-primary font-weight-bold" href="https://www.gnu.org/licenses/agpl-3.0.en.html"> AGPL 3.0 </a>
+          &nbsp;&amp;&nbsp;
+          <a class="text-primary font-weight-bold" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"> Creative Commons (CC BY-NC-SA 4.0) </a>
+        </div>
+      </footer>
+    <script src="./assets/js/toggleSidebar.js"></script>
+    <script src="./assets/js/event-handler.js"></script>
+
+
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register("sw.js");
+        });
+      }
+    </script>
+  
+
+<script type="module" src="https://cdn.vlabs.ac.in/bug-report/vlabs-bug-report.js"></script><script type="module" src="/exp-viterbi-exons-au/plugins/svc-rating/index.js"></script><script type="module" src="/exp-viterbi-exons-au/plugins/svc-rating/config.js"></script><script type="module" src="https://apis.google.com/js/api.js"></script></body></html>
