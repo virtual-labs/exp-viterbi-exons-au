@@ -9,6 +9,6 @@
 | SNo. | Name | Department | Institute | Email |
 | :---: | :---: | :---: | :---: | :---: |
 | 1 | Kishan Nag M.P | Amrita School of Biotechnology | Amrita Vishwa Vidyapeetham | nagmedapraveenkishan@gmail.com|
-| 2 | Nijin N | Amrita Virtual Labs | Amrita Vishwa Vidyapeetham | nijinn@am.amrita.edu
-| 3 | Rakhi Radhamani | Amrita Virtual Labs | Amrita Vishwa Vidyapeetham | rakhir@am.amrita.edu
+| 2 | Rakhi Radhamani | Amrita Virtual Labs | Amrita Vishwa Vidyapeetham | rakhir@am.amrita.edu
+| 3 | Nijin N | Amrita Virtual Labs | Amrita Vishwa Vidyapeetham | nijinn@am.amrita.edu
 | 4 | Dhanush Kumar | Amrita Virtual Labs | Amrita Vishwa Vidyapeetham | dhanushkumar@am.amrita.edu 
