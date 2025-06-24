@@ -81,9 +81,9 @@ It consists of three steps-
 
 At=1, the observable (O) = A. The Forward probability (α) for the first observable is the product of the corresponding initial probability and emission probability. 
 
-α1-intron = π(intron) × b(A-intron) = 0.8 × 0.4 = 0.32
+α<sub>1-intron</sub> = π<sub>(intron)</sub> × b<sub>(A-intron)</sub> = 0.8 × 0.4 = 0.32
 
-α1-exon = π(exon) × b(A-exon) = 0.2 × 0.6= 0.12
+α<sub>1-exon</sub> = π<sub>(exon)</sub> × b<sub>(A-exon)</sub> = 0.2 × 0.6= 0.12
 
 <img src="images/6.png" title="" />
 
@@ -95,23 +95,23 @@ At t=2, O=C. For the next part, we’ll be considering the probability of both t
 
 As shown in the picture:
 
-α1-intron = 0.32, aintron-intron = 0.7
+α<sub>1-intron</sub> = 0.32, a<sub>intron-intron</sub> = 0.7
 
-α1-exon = 0.12, aexon-exon = 0.7
+α<sub>1-exon</sub> = 0.12, a<sub>exon-exon</sub> = 0.7
 
-bC-intron = 0.3
+b<sub>C-intron</sub> = 0.3
 
-α2-intron = α1-intron × aintron-intron × bC-intron + α1-exon × aexon-intron × bC-intron
+α<sub>2-intron</sub> = α<sub>1-intron</sub> × a<sub>intron-intron</sub> × b<sub>C-intron</sub> + α<sub>1-exon</sub> × a<sub>exon-intron</sub> × b<sub>C-intron</sub>
 
-α2-intron = ((α1-intron × aintron-intron) + (α1-exon × aexon-intron)) × bC-intron
+α<sub>2-intron</sub> = ((α<sub>1-intron</sub> × a<sub>intron-intron</sub>) + (α<sub>1-exon</sub> × a<sub>exon-intron</sub>)) × b<sub>C-intron</sub>
 
-α2-intron = (( 0.32 × 0.7 ) + ( 0.12 × 0.7 )) × 0.3
+α<sub>2-intron</sub> = (( 0.32 × 0.7 ) + ( 0.12 × 0.7 )) × 0.3
 
-α2-intron = ( 0.224 + 0.84 ) × 0.3
+α<sub>2-intron</sub> = ( 0.224 + 0.84 ) × 0.3
 
-α2-intron = ( 0.308 ) × 0.3
+α<sub>2-intron</sub> = ( 0.308 ) × 0.3
 
-α2-intron = 0.0924
+α<sub>2-intron</sub> = 0.0924
 
 <img src="images/8.png" title="" />
 
@@ -134,7 +134,7 @@ In the same manner, for the rest of the states:
 ##### 3.	Termination:
 The total probability for our sequence of observables, P(O) = αT-intron + αT-exon. This is basically, the sum of the α values calculated at the end of the sequence (T denotes last position).
 
-P(O) = α4-intron + α4-exon
+P(O) = α<sub>4-intron</sub> + α<sub>4-exon</sub>
 
 P(O) = 0.0215 + 0.0160
 
@@ -168,19 +168,19 @@ For t=4:
 
 As shown in the picture:
 
-β5-intron = 1, aintron-intron = 0.3, bG-intron = 0.6
+β<sub>5-intron</sub> = 1, a<sub>intron-intron</sub> = 0.3, b<sub>G-intron</sub> = 0.6
 
-β5-exon = 1, aintron-exon = 0.7, bG-exon = 0.4
+β<sub>5-exon</sub> = 1, a<sub>intron-exon</sub> = 0.7, b<sub>G-exon</sub> = 0.4
 
 Note- Although the algorithm is backtracking, we are considering transition probabilities from t to t+1 and the emission probabilities are for t+1 and are thus different in both cases.
 
-β4-intron = ( β5-intron × aintron-intron × bG-intron ) + ( β5-exon × aintron-exon × bG-exon )
+β<sub>4-intron</sub> = ( β<sub>5-intron</sub> × a<sub>intron-intron</sub> × b<sub>G-intron</sub> ) + ( β<sub>5-exon</sub> × a<sub>intron-exon</sub> × b<sub>G-exon</sub> )
 
-β4-intron = ( 1 × 0.3 × 0.6 ) + ( 1 × 0.7 × 0.4 )
+β<sub>4-intron</sub> = ( 1 × 0.3 × 0.6 ) + ( 1 × 0.7 × 0.4 )
 
-β4-intron = ( 0.18 ) + ( 0.28 )
+β<sub>4-intron</sub> = ( 0.18 ) + ( 0.28 )
 
-β4-intron = 0.46
+β<sub>4-intron</sub> = 0.46
 
 
 &nbsp;
@@ -382,7 +382,7 @@ For (Intron, A):
 b(A-intron) = Σ (if O=A)(γt-intron) / Σ γt-intron
 Since we have taken a simple sequence, the we have only one γt-intron value where O=A. The denominator, is the sum of all γt-intron values regardless of what O is.
 
-b(A-intron) = 0.9207 / 0.9207 + 0.5524 + 0.433 + 0.5733
+b<sub>(A-intron)</sub> = 0.9207 / 0.9207 + 0.5524 + 0.433 + 0.5733
 
 b(A-intron) = 0.9207 / 2.4794
 
