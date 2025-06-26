@@ -222,26 +222,26 @@ This value is obtained by dividing the product of the corresponding α and β va
 
 For example:
 
-γ1-intron = (α1-intron × β1-intron) / P(O)
+γ<sub>1-intron</sub> = (α<sub>1-intron</sub> × β<sub>1-intron</sub>) / P(O)
 
-γ1-intron = (0.32 × 0.1079) / 0.0375
+γ<sub>1-intron</sub> = (0.32 × 0.1079) / 0.0375
 
-γ1-intron = 0.0345/0.0375
+γ<sub>1-intron</sub> = 0.0345/0.0375
 
-γ1-intron = 0.9207
+γ<sub>1-intron</sub> = 0.9207
 
 
 &nbsp;
 
-Similarly for γ1-exon:
+Similarly for γ<sub>1-exon</sub>:
 
-γ1-exon = (α1-exon × β1-exon) / P(O)
+γ<sub>1-exon</sub> = (α<sub>1-exon</sub> × β<sub>1-exon</sub>) / P(O)
 
-γ1-exon = (0.12 × 0.1620) / 0.0375
+γ<sub>1-exon</sub> = (0.12 × 0.1620) / 0.0375
 
-γ1-exon = 0.0194/0.0375
+γ<sub>1-exon</sub> = 0.0194/0.0375
 
-γ1-exon = 0.5184
+γ<sub>1-exon</sub> = 0.5184
 
 &nbsp;
 
@@ -273,9 +273,9 @@ For ε at t=1:
 
 O1 = A, Ot+1 = C
 
-α1-intron = 0.32, β1-intron = 0.1079
+α<sub>1-intron</sub> = 0.32, β<sub>1-intron</sub> = 0.1079
 
-α1-exon = 0.12, β1-exon = 0.1620
+α<sub>1-exon</sub> = 0.12, β<sub>1-exon</sub> = 0.1620
 
 P(O) = 0.0375
 
@@ -283,57 +283,57 @@ P(O) = 0.0375
 
 ######  •	intron-intron:
 
-aintron-intron = 0.7, b(C-intron) = 0.3
+a<sub>intron-intron</sub> = 0.7, b<sub>(C-intron)</sub> = 0.3
 
-ε1(i-i) = ( α1-intron × β1-intron × aintron-intron × b(C-intron) ) / P(O)
+ε<sub>1(i-i)</sub> = ( α<sub>1-intron</sub> × β<sub>1-intron</sub> × a<sub>intron-intron</sub> × b<sub>(C-intron)</sub> ) / P(O)
 
-ε1(i-i) = ( 0.32 × 0.1079 × 0.7 × 0.3 ) / 0.0375
+ε<sub>1(i-i)</sub> = ( 0.32 × 0.1079 × 0.7 × 0.3 ) / 0.0375
 
-ε1(i-i) =  0.0072/ 0.0375
+ε<sub>1(i-i)</sub> =  0.0072/ 0.0375
 
-ε1(i-i) =  0.192
+ε<sub>1(i-i)</sub> =  0.192
 
 &nbsp;
 
 ######  •	intron-exon:
 
-aintron-exon = 0.3, b(C-exon) = 0.7
+a<sub>intron-exon</sub> = 0.3, b<sub>(C-exon)</sub> = 0.7
 
-ε1(i-e) = ( α1-intron × β1-intron × aintron-exon × b(C-exon) ) / P(O)
+ε<sub>1(i-e)</sub> = ( α<sub>1-intron</sub> × β<sub>1-intron</sub> × a<sub>intron-exon</sub> × b<sub>(C-exon)</sub> ) / P(O)
 
-ε1(i-e) = ( 0.32 × 0.1079 × 0.3 × 0.7 ) / 0.0375
+ε<sub>1(i-e)</sub> = ( 0.32 × 0.1079 × 0.3 × 0.7 ) / 0.0375
 
-ε1(i-e) = 0.0072/ 0.0375
+ε<sub>1(i-e)</sub> = 0.0072/ 0.0375
 
-ε1(i-e) = 0.192
+ε<sub>1(i-e)</sub> = 0.192
 
 &nbsp;
 
 ######  •	exon-intron:
 
-aexon-intron = 0.45, b(C-intron) = 0.3
+a<sub>exon-intron</sub> = 0.45, b<sub>(C-intron)</sub> = 0.3
 
-ε1(e-i) = ( α1-exon × β1-exon × aexon-intron × b(C-intron) ) / P(O)
+ε<sub>1(e-i)</sub> = ( α<sub>1-exon</sub> × β<sub>1-exon</sub> × a<sub>exon-intron</sub> × b<sub>(C-intron)</sub> ) / P(O)
 
-ε1(e-i) = ( 0.12 × 0.1620 × 0.45 × 0.3 ) / 0.0375
+ε<sub>1(e-i)</sub> = ( 0.12 × 0.1620 × 0.45 × 0.3 ) / 0.0375
 
-ε1(e-i) = 0.0026 / 0.0375
+ε<sub>1(e-i)</sub> = 0.0026 / 0.0375
 
-ε1(e-i) = 0.0693
+ε<sub>1(e-i)</sub> = 0.0693
 
 &nbsp;
 
 ######  •	exon-exon:
 
-aexon-exon = 0.65, b(C-exon) = 0.7
+a<sub>exon-exon</sub> = 0.65, b<sub>(C-exon)</sub> = 0.7
 
-ε1(e-e) = ( α1-exon × β1-exon × aexon-itron × b(C-intron) ) / P(O)
+ε<sub>1(e-e)</sub> = ( α<sub>1-exon</sub> × β<sub>1-exon</sub> × a<sub>exon-itron</sub> × b<sub>(C-intron)</sub> ) / P(O)
 
-ε1(e-e) = ( 0.12 × 0.1620 × 0.65 × 0.7 ) / 0.0375
+ε<sub>1(e-e)</sub> = ( 0.12 × 0.1620 × 0.65 × 0.7 ) / 0.0375
 
-ε1(e-e) = 0.0088/0.0375
+ε<sub>1(e-e)</sub> = 0.0088/0.0375
 
-ε1(e-e) = 0.2347
+ε<sub>1(e-e)</sub> = 0.2347
 
 &nbsp;
 
@@ -353,18 +353,18 @@ For example,
 
 For intron-intron:
 
-ε1(i-i) = 0.192, ε2(i-i) = 0.1547, ε3(i-i) = 0.1819
+ε<sub>1(i-i)</sub> = 0.192, ε<sub>2(i-i)</sub> = 0.1547, ε<sub>3(i-i)</sub> = 0.1819
 
-γ1-i = 0.9207, γ2-i = 0.5224, γ3-i = 0.433
+γ<sub>1-i</sub> = 0.9207, γ<sub>2-i</sub> = 0.5224, γ<sub>3-i</sub> = 0.433
 
 
-a(intron-intron) = (ε1(i-i) + ε2(i-i) + ε3(i-i)) / (γ1-i + γ2-i + γ3-i)
+a<sub>(intron-intron)</sub> = (ε<sub>1(i-i)</sub> + ε<sub>2(i-i)</sub> + ε<sub>3(i-i)</sub>) / (γ<sub>1-i</sub> + γ<sub>2-i</sub> + γ<sub>3-i</sub>)
 
-a(intron-intron) = (0.192 + 0.1547 + 0.1819) / (0.9207 + 0.5524 + 0.433)
+a<sub>(intron-intron)</sub> = (0.192 + 0.1547 + 0.1819) / (0.9207 + 0.5524 + 0.433)
 
-a(intron-intron) = 0.5286 / 1.861
+a<sub>(intron-intron)</sub> = 0.5286 / 1.861
 
-a(intron-intron) = 0.284
+a<sub>(intron-intron)</sub> = 0.284
 
 &nbsp;
 
@@ -379,14 +379,14 @@ Here, we are calculating the emission of a particular observable by a particular
 
 For (Intron, A):
 
-b(A-intron) = Σ (if O=A)(γt-intron) / Σ γt-intron
+b<sub>(A-intron)</sub> = Σ (if O=A)(γ<sub>t-intron</sub>) / Σ γ<sub>t-intron</sub>
 Since we have taken a simple sequence, the we have only one γt-intron value where O=A. The denominator, is the sum of all γt-intron values regardless of what O is.
 
 b<sub>(A-intron)</sub> = 0.9207 / 0.9207 + 0.5524 + 0.433 + 0.5733
 
-b(A-intron) = 0.9207 / 2.4794
+b<sub>(A-intron)</sub> = 0.9207 / 2.4794
 
-b(A-intron) = 0.3713
+b<sub>(A-intron)</sub> = 0.3713
 
 &nbsp;
 
@@ -410,17 +410,17 @@ Consider an example of AGTC for this:
 ##### 1.	Initialization:
 This is the same as in the case of the Forward algorithm, δ1 will be the product of the initial probability and the emission probability. 
 
-δ1-intron = πintron × bA-intron
+δ<sub>1-intron</sub> = π<sub>intron</sub> × b<sub>A-intron</sub>
 
-δ1-intron = 0.8 × 0.3713
+δ<sub>1-intron</sub> = 0.8 × 0.3713
 
-δ1-intron = 0.297
+δ<sub>1-intron</sub> = 0.297
 
-δ1-exon = πexon × bA-exon
+δ<sub>1-exon</sub> = π<sub>exon</sub> × b<sub>A-exon</sub>
 
-δ1-exon = 0.2 × 0.3054
+δ<sub>1-exon</sub> = 0.2 × 0.3054
 
-δ1-exon = 0.0611
+δ<sub>1-exon</sub> = 0.0611
 
 
 <img src="images/22.png" title="" />
@@ -430,19 +430,19 @@ This is the same as in the case of the Forward algorithm, δ1 will be the produc
 ##### 2.	Recursion:
 Here, the basic formula is the same of the forward algorithm but we do not add up the values from two different states. Instead, we only consider the one with the maximum value and go ahead.
 
-δ2-intron = max[δ1-intron × aintron-intron, δ1-exon × aexon-intron] × bG-intron
+δ<sub>2-intron</sub> = max[δ1-intron × aintron-intron, δ1-exon × aexon-intron] × bG-intron
 
-δ2-intron = max[0.297 × 0.284, 0.0611 × 0.1858] × 0.2312
+δ<sub>2-intron</sub> = max[0.297 × 0.284, 0.0611 × 0.1858] × 0.2312
 
-δ2-intron = max[0.0843, 0.0114] × 0.2312
+δ<sub>2-intron</sub> = max[0.0843, 0.0114] × 0.2312
 
 &nbsp;
 
 Since the max of them both is 0.0843, we go ahead with that and ignore 0.0114
 
-δ2-intron = 0.0843 × 0.2312
+δ<sub>2-intron</sub> = 0.0843 × 0.2312
 
-δ2-intron = 0.0195
+δ<sub>2-intron</sub> = 0.0195
 
 
 <img src="images/23.png" title="" />
@@ -451,15 +451,15 @@ Since the max of them both is 0.0843, we go ahead with that and ignore 0.0114
 
 Similarly, we calculate δ2-exon:
 
-δ2-exon = max[δ1-intron × aintron-exon, δ1-exon × aexon-exon] × bG-exon
+δ<sub>2-exon</sub> = max[δ<sub>1-intron</sub> × a<sub>intron-exon</sub>, δ<sub>1-exon</sub> × a<sub>exon-exon</sub>] × b<sub>G-exon</sub>
 
-δ2-exon = max[0.297 × 0.2537, 0.0611 × 0.38] × 0.2374
+δ<sub>2-exon</sub> = max[0.297 × 0.2537, 0.0611 × 0.38] × 0.2374
 
-δ2-exon = max[0.0753,0.0232] × 0.2374
+δ<sub>2-exon</sub> = max[0.0753,0.0232] × 0.2374
 
-δ2-exon = 0.0753 × 0.2374
+δ<sub>2-exon</sub> = 0.0753 × 0.2374
 
-δ2-exon = 0.0179
+δ<sub>2-exon</sub> = 0.0179
 
 
 <img src="images/24.png" title="" />
@@ -479,11 +479,11 @@ After calculating the δ values for t=T (last position), we choose the higher pr
 
 In this case,
 
-δ4-intron = 3.6728 × 10-4
+δ<sub>4-intron</sub> = 3.6728 × 10-4
 
-δ4-exon = 1.3367 × 10-4
+δ<sub>4-exon</sub> = 1.3367 × 10-4
 
-Since δ4-intron is higher, we choose this as our final state.
+Since δ<sub>4-intron</sub> is higher, we choose this as our final state.
 
 
 &nbsp;
