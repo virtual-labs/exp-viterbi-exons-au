@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMM Web Tool</title>
+    <style>
+
+        .page-title {
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        .logo-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000; /* Ensure it stays on top */
+        }
+
+        .logo-container img {
+            height: 50px; /* Adjust as needed */
+            width: auto; /* Maintain aspect ratio */
+            cursor: pointer; /* Optional: Make it clickable */
+        }
+
+        /* Floating Button */
+        .floating-buttons {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: row;
+            gap: 10px; 
+            background: none; 
+            border-radius: 0;
+            box-shadow: none; 
+            padding: 0; 
+        }
+
+        .floating-buttons button {
+            background: linear-gradient(145deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease-in-out, transform 0.2s ease-in-out;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .floating-buttons button:hover {
+            background: linear-gradient(145deg, #0056b3, #003d80);
+            transform: scale(1.1);
+            box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+       .floating-buttons button:active {
+            transform: scale(1.05);
+            box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .modal-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 90%;
+            max-height: 90%;
+            overflow: auto; /* Enable scrolling inside the modal */
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .modal img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: auto;
+        }
+
+        /* Close Button */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            background: red;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 50%;
+            transition: background 0.2s ease-in-out;
+        }
+
+        .close-btn:hover {
+            background: darkred;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        .custom-alert {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ffdddd;
+            color: #a94442;
+            border: 2px solid #a94442;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            min-width: 300px;
+        }
+
+        .custom-alert p {
+            font-weight: normal; /* Make sure the text can have different weights */
+        }
+
+        .custom-alert b {
+            font-weight: bold; /* Make only the bold text bold */
+        }
+
+        .custom-alert button {
+            background-color: #a94442;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .custom-alert button:hover {
+            background-color: #922b21;
+        }
+
+        .instruction-container {
+            width: 100%;
+            background: #E8F0FE; /* Light Blue Background */
+            padding: 10px;
+            border-left: 5px solid #3A75C4; /* Deep Blue Accent */
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+            color: #1A3D7C; /* Dark Blue Text for Readability */
+            font-size: 16px;
+        }
+        .info-box {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.5;
+            transition: max-height 0.3s ease-in-out;
+        }
+
+        /* Collapsible Button */
+        .collapse-btn {
+            background: #3A75C4;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            text-align: left;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .collapse-btn:hover {
+            background: #3A75C4;
+        }
+
+        /* Split Screen Layout */
+        .split-container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .left-panel {
+            width: 45%;
+            background: #f4f4f4;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .right-panel {
+            width: 55%;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .resizer {
+            width: 5px;
+            background: linear-gradient(to right, #ccc, #888);
+            cursor: ew-resize;
+            transition: background 0.2s ease-in-out;
+        }
+
+        .resizer:hover {
+            background: #666;
+        }
+
+        @media screen and (max-width: 768px) { /* Applies only on smaller screens */
+            .split-container {
+                flex-direction: column; /* Stack left & right panels vertically */
+                height: auto;
+            }
+        
+            .left-panel, .right-panel {
+                width: 100%; /* Full width in mobile */
+                padding: 10px;
+            }
+        
+            .floating-buttons {
+                bottom: 10px;
+                right: 10px;
+                flex-direction: row; /* Buttons appear side-by-side */
+                gap: 5px; /* Reduce space between buttons */
+            }
+        
+            .floating-buttons button {
+                padding: 8px 10px;
+                font-size: 14px; /* Smaller buttons for mobile */
+            }
+        
+            .modal-content {
+                max-width: 95%; /* Reduce modal width to fit smaller screens */
+                max-height: 90vh; /* Ensure it doesn’t exceed viewport height */
+            }
+        
+            .modal-content img {
+                max-width: 100%;
+                max-height: 70vh; /* Ensures scrollability */
+            }
+        
+            .viterbi-graph {
+                overflow-x: auto;
+                white-space: nowrap; /* Prevents text wrapping */
+                padding: 3px;
+            }
+        
+            .viterbi-box {
+                padding: 4px; /* Make boxes slightly smaller for mobile */
+                font-size: 14px;
+            }
+        
+            /* Ensure tables are scrollable */
+            .eeta-scrollable-container {
+                max-height: 150px; /* Reduce height for better mobile fit */
+            }
+        
+            .eeta-table {
+                font-size: 12px; /* Smaller font for mobile readability */
+            }
+        
+            /* Tooltip Optimization */
+            .viterbi-box::before {
+                font-size: 10px; /* Smaller tooltip text */
+                padding: 3px;
+            }
+        }
+        
+        textarea, input {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .button-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;  /* Add spacing between buttons */
+            margin-bottom: 10px;  /* Space between rows */
+        }
+
+        .download-link {
+            font-size: 14px;
+            font-weight: bold;
+            color: #007BFF; /* Bootstrap-style blue link */
+            text-decoration: none;
+            margin-left: auto;  /* Push to the right */
+        }
+
+        .download-link:hover {
+            text-decoration: underline;
+        }
+
+        .styled-button {
+            display: inline-block;
+            padding: 8px 12px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            background-color: #f8f8f8;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .styled-button:hover {
+            background-color: #e0e0e0;
+            border-color: #999;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        .highlight {
+            padding: 12px 18px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(145deg, #4CAF50, #2E8B57);
+            border: none;
+            border-radius: 8px;
+            box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            margin-bottom: 10px;
+        }
+
+        /* Hover Effect - Slightly Raised */
+        .highlight:hover {
+            background: linear-gradient(145deg, #3e8e41, #26734d);
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Active (Pressed) Effect */
+        .highlight:active {
+            transform: translateY(2px);
+        }
+
+        /* Default Step Button - Disabled Look */
+        .step-btn {
+            background: #ccc; /* Grey disabled look */
+            color: #777;
+            cursor: not-allowed;
+            border: none;
+            padding: 12px 18px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            margin-bottom: 10px;
+        }
+
+        /* Enabled Button (Green Gradient - Default) */
+        .step-btn.enabled {
+            background: linear-gradient(145deg, #4CAF50, #2E8B57); /* Green gradient */
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Hover Effect */
+        .step-btn.enabled:hover {
+            background: linear-gradient(145deg, #3e8e41, #26734d);
+        }
+
+        /* Variant 1: Light Blue */
+        .step-btn.gen-assumed {
+            background: linear-gradient(145deg, #42A5F5, #1E88E5); /* Light blue gradient */
+            color: white;
+            cursor: pointer;
+        }
+
+        .step-btn.gen-assumed:hover {
+            background: linear-gradient(145deg, #1E88E5, #1565C0);
+        }
+
+        /* Variant 2: Soft Steel Blue */
+        .step-btn.fwd-bwd {
+            background: linear-gradient(145deg, #5C87B2, #3B6A92); /* Soft steel blue gradient */
+            color: white;
+            cursor: pointer;
+        }
+
+        .step-btn.fwd-bwd:hover {
+            background: linear-gradient(145deg, #3B6A92, #2A4F72);
+        }
+
+        /* Variant 3: Muted Teal Blue */
+        .step-btn.reestimate {
+            background: linear-gradient(145deg, #3A6978, #26515D); /* Muted teal blue gradient */
+            color: white;
+            cursor: pointer;
+        }
+
+        .step-btn.reestimate:hover {
+            background: linear-gradient(145deg, #26515D, #1B3D46);
+        }
+
+        .step-btn.viterbi {
+            background: linear-gradient(145deg, #1E3A5F, #122A45); /* Deep Blue gradient */
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 12px 18px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .step-btn.viterbi:hover {
+            background: linear-gradient(145deg, #172B47, #0E1E33); /* Slightly darker blue */
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .download-btn.viterbi {
+            background: linear-gradient(145deg, #1E3A5F, #122A45); /* Deep Blue gradient */
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 12px 18px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .download-btn.viterbi:hover {
+            background: linear-gradient(145deg, #172B47, #0E1E33); /* Slightly darker blue */
+        }
+
+        .output {
+            min-height: 300px;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background: #f9f9f9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+
+        .table-assumed-parameters {
+            background: #E3F2FD; /* Light blue */
+        }
+
+        .table-assumed-parameters th {
+            background: #42A5F5; /* Medium blue */
+        }
+
+        .table-fwd-bwd {
+            background: #E0ECF8; /* Soft steel blue */
+        }
+
+        .table-fwd-bwd th {
+            background: #5C87B2; /* Deep steel blue */
+        }
+
+        .table-reestimated {
+            background: #D1E8E2; /* Muted teal blue */
+        }
+
+        .table-reestimated th {
+            background: #3A6978; /* Deep teal blue */
+        }
+
+        .scrollable-table {
+            max-height: 200px; 
+            overflow-y: auto;
+            overflow-x: auto;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+        }
+
+        .eeta-scrollable-container {
+            max-height: 200px;
+            overflow-y: auto;
+            overflow-x: auto;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            border-radius: 8px; 
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
+        }
+
+        .eeta-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            overflow: hidden;
+        }
+
+        .eeta-table th,
+        .eeta-table td {
+            border: 1px solid #3A6978;
+            padding: 10px; 
+            text-align: center;
+        }
+
+        .eeta-table th {
+            background: #3A6978; 
+            color: white;
+            font-weight: bold;
+        }
+
+        .eeta-table td {
+            background: white;
+        }
+
+        .eeta-table thead th {
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+
+        .info-box {
+            background-color: #f8f8f8;
+            border-left: 5px solid #3A75C4;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            line-height: 1.5;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .viterbi-graph {
+            display: flex;
+            gap: 2px;
+            margin-top: 10px;
+            overflow-x: auto;
+            padding: 5px;
+            border: 1px solid #ccc;
+            background-color: #f8f8f8;
+        }
+
+        .viterbi-box {
+            display: inline-block; /* Fix for ::before pseudo-elements */
+            position: relative; /* Needed for absolute positioning of the tooltip */
+            padding: 5px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer; /* Indicate interactivity */
+        }
+
+        /* Exon Box */
+        .viterbi-box.exon {
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px;
+            border-radius: 4px;
+            font-weight: bold;
+            position: relative;
+        }
+        /* Intron Box */
+        .viterbi-box.intron {
+            background-color: #D32F2F;
+            color: white;
+            padding: 5px;
+            border-radius: 4px;
+            font-weight: bold;
+            position: relative;
+        }
+        /* Tooltip Styling */
+        .viterbi-box::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 120%; /* better visibility */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 5px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            max-width: 200px;
+            text-align: center;
+            word-wrap: break-word;
+            z-index: 1000; /* Ensure it stays on top */
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        /* Hover-box */
+        .viterbi-box:hover::before {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logo-container">
+        <img src="https://webfiles.amrita.edu/2024/04/WhQq1FiB-amrita-vishwa-vidyapeetham-university-logo-colored-version.svg" 
+             alt="HMM Tool Logo">
+    </div>    
+
+    <h1 class="page-title">HMM-Based Simulation for Exon-Intron Prediction</h1>
+
+    <div class="floating-buttons">
+        <button id="flowchart-btn" class="floating-btn">Procedure-Guide</button>
+        <button id="hmm-btn" class="floating-btn">HMM Parameters</button>
+    </div>
+
+    <div id="flowchart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('flowchart-modal')">&times;</span>
+            <img src="images\/WebTool_InfoGraphic.png" alt="Flowchart Guide">
+        </div>
+    </div>
+
+    
+    <div id="hmm-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('hmm-modal')">&times;</span>
+            <img src="images\HMM_Parameters.png" alt="HMM Parameters">
+        </div>
+    </div>
+
+    <!-- Alert message -->
+    <div id="custom-alert" class="custom-alert">
+        <p id="alert-message"></p>
+        <button onclick="hideAlert()">OK</button>
+    </div>
+
+    <div class="instruction-container">
+        <button class="collapse-btn" onclick="toggleInstructions()">Instructions ▼</button>
+        <div id="instructionBox" class="info-box"></div>
+    </div>
+    <div class="split-container">
+        <div class="left-panel">
+            <h2>Sample Sequences</h2>
+            <textarea id="sequences" placeholder="Enter 5 sequences, separated by newlines or upload a fasta file."></textarea>
+            <div class="button-container">
+                <input type="file" id="fastaUpload" accept=".fasta" onchange="handleFastaUpload(event)">
+                <button class="styled-button" onclick="resetAll()">Reset</button>
+                <a id="downloadLink" onclick="downloadSampleFasta()" class="download-link">Download Sample File</a>
+            </div>
+    
+            <button id="start-analysis-btn" class="step-btn gen-assumed enabled" onclick="handleStep(1, startAnalysis)">Generate Assumed Parameters</button>
+    
+            <div id="calculationSection" style="display: none;">
+                <button id="forward-backward-btn" class="step-btn fwd-bwd" onclick="handleStep(2, calculateForwardBackward)">Calculate Forward and Backward Values</button>
+            </div>
+    
+            <div id="reestimateSection" style="display: none;">
+                <button id="reestimate-btn" class="step-btn reestimate" onclick="handleStep(3, reestimateParameters)">Re-estimate Parameters</button>
+            </div>
+            <div id="viterbiSection" style="display: none;">
+                <h2>Viterbi Algorithm</h2>
+                <input id="querySequence" type="text" placeholder="Enter the query sequence for Viterbi algorithm or upload a fasta file.">
+                <div class="button-container">
+                    <input type="file" id="queryFastaUpload" accept=".fasta" onchange="handleQueryFastaUpload(event)">
+                    <button class="styled-button" onclick="resetQuerySequence()">Reset</button>
+                    <a id="downloadqueryLink" onclick="downloadSampleQueryFasta()" class="download-link">Download Query File</a>
+                </div>
+                <button id="viterbi-btn" class="step-btn viterbi" onclick="handleStep(4, runViterbiQuery)">Run Viterbi</button>
+            </div>
+        </div>
+
+        <div class="resizer"></div> <!-- Resizable Divider -->
+
+        <div class="right-panel">
+            <div id="output" class="table-assumed-parameters"></div>
+            <div id="calculationOutput" class="table-fwd-bwd"></div>
+            <div id="reestimateOutput" class="table-reestimated"></div>
+            <div id="viterbiOutput" class="output"></div>
+        </div>
+    </div>
+    
+
+    <script defer>
+
+        document.getElementById("flowchart-btn").addEventListener("click", function () {
+            document.getElementById("flowchart-modal").style.display = "flex";
+        });
+
+        document.getElementById("hmm-btn").addEventListener("click", function () {
+            document.getElementById("hmm-modal").style.display = "flex";
+        });
+
+        // Close modal when clicking the close button
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            function scrollToSection(sectionId) {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    section.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+            }
+
+            document.getElementById("start-analysis-btn").addEventListener("click", function () {
+                scrollToSection("output");
+            });
+
+            document.getElementById("forward-backward-btn").addEventListener("click", function () {
+                scrollToSection("calculationOutput");
+            });
+            document.getElementById("reestimate-btn").addEventListener("click", function () {
+            scrollToSection("reestimateOutput");
+            });
+            document.getElementById("viterbi-btn").addEventListener("click", function () {
+            scrollToSection("viterbiOutput");
+            });
+        });
+
+        function handleStep(step, callback) {
+            callback(); // Call the respective function (e.g., startAnalysis)
+
+            const buttonIds = ["start-analysis-btn", "forward-backward-btn", "reestimate-btn"];
+            const buttonColors = ["gen-assumed", "fwd-bwd", "reestimate", "viterbi"]; // Corresponding colors
+
+            // 🔹 First, reset all buttons to default state
+            buttonIds.forEach((id, index) => {
+                let button = document.getElementById(id);
+                if (button) {
+                    button.classList.remove("enabled", "gen-assumed", "fwd-bwd", "reestimate"); // Remove old styles
+                    button.disabled = index !== step; // Disable all except the next button
+                }
+            });
+        
+            // 🔹 Disable the current button
+            let currentButton = document.getElementById(buttonIds[step - 1]);
+            if (currentButton) {
+                currentButton.disabled = true;
+            }
+        
+            // 🔹 Enable the next button and apply styles
+            if (step < buttonIds.length) {
+                let nextButton = document.getElementById(buttonIds[step]);
+                if (nextButton) {
+                    nextButton.disabled = false;
+                    nextButton.classList.add("enabled"); // Apply main enabled class
+
+                    // Apply the correct color
+                    if (buttonColors[step]) {
+                        nextButton.classList.add(buttonColors[step]);
+                    }
+                }
+            }
+        }
+
+        document.getElementById("instructionBox").innerHTML = `
+            <ol>
+                <li>Use the "Procedure-Guide" button to view the process flowchart and understand the working of the Model.</li>
+                <li>Use the "HMM Parameters" button to view the pictorial reprsentation of the HMM parameters.</li>
+                <li>Click the close button while viewing either image to return to the main interface.</li>
+                <li>Please read the alert boxes that appear upon clicking any of the buttons, they mention what is the next step to be performed.</li>
+                <li>Enter 5 sequences manually or upload a FASTA file using the Browse button.</li>
+                <li>Download Sample Sequences for an example file if needed by clicking on the download button.</li>
+                <li>Click on the reset button to clear the input field.</li>
+                <li>Click "Generate Assumed parameters" to generate initial HMM parameters.</li>
+                <li>Click "Calculate Forward-Backward Values" to compute probabilities of forward and backward values.</li>
+                <li>Click "Re-estimate Parameters" to update HMM parameters using Baum-Welch absed on the forward-backward values.</li>
+                <li>Enter a query sequence manually or upload a FASTA file for Viterbi.</li>
+                <li>Download a sample query sequence if needed by clicking on the download button</li>
+                <li>Click on the reset button to clear the input field</li>
+                <li>Click "Run Viterbi" to predict the most likely hidden states.</li>
+            </ol>
+            `;
+
+        function downloadSampleFasta() {
+            // Define sample sequences
+            const sampleSequences = [
+                { header: ">NG_066009.1 Homo sapiens keratin associated protein 12-5, pseudogene (KRTAP12-5P) on chromosome 21", sequence: "GAGTAACCTCAACAAGAAAACCCAGAAAGATCAACAGGAGAGGGCAGAGGAGGAAAACCCACCCAAGGAGGAAGATGCCAGGGGCCTTGCTGCCCGAATGCCCATGACCTGCCCTGGTTCTATGCTGCATCTCCACCACCTGCTGCCCACCCAGGGCTGTGGGACCTCCTGCTGCCACCTGGCCACCCCCGCCCTGCCCCCCGCACCGTGCAGCTCTGCTGTGCCGGCCCCTGTGTGAGGCATCCACCTCCTGCCAGCTGGCCTGCCGCATGCTCAGGTCGGGCCTGTGTGTGGCCGCCTCCTGCGGGTCCTCCAGGTGCTGCCCGCCCTTCTGCCCCTTCCCTGGCCTGCAGACCTGTGACCTGCCACACCGGCCTGCTGCTGATGGATTATCCTGATAATCAACTCTCTGCTATTGTTTAGCAAAAGCCTTTCCCTTTGTCCTATTATCAGAATCCCCCTGCACTTCTCAGTCCCTGGTG" },
+                { header: ">NG_075677.1 Homo sapiens small cysteine and glycine repeat containing 9 (pseudogene) (SCYGR9) on chromosome 2", sequence: "AGCAGCAGTATTTAAGGGTCCCTTGCAGAGGCAAACATCAGACCTCGTCACCTCTCACATCCTCCCTCCTCACTTCACCTGAGTCCTCTCTACTGACACCATGGGTTGCTGTGGTTGTGGAAGTTGTGGCTGCAGTGGTGGCTGAGGTGGTGGCTGCGGTGGTGGCTGCGGTGGTGGCTGTGGCAGCTGCACCACCTGCAGGTGCTACCGGGTGGGCTGCTGCTCCAGCTGCTGCCCCTGCTGCCGCGGCTGCTGTGGAGGCTGCTGCAGCACTCCCGTGATCTGCTGCTGCCGCCGTACCTGCAGCTCGTGTGGCTGCGGCTGTGGGAAGGGCTGTTGCCAACAGAAATCCTGCTGCCAAAAGCAATGCTGCTGCTAGGCAGGGCACCTGACTCTGGAAGAGTTTGCTGCATCTTGCTTGCCCATTGCAAGCCTTCCCCCAACCTCGCCCTGGTTCTCTTTCCATCACTGGGAGTCAC" },
+                { header: ">NG_002689.3 Homo sapiens keratin associated protein 19-10, pseudogene (KRTAP19-10P) on chromosome 21", sequence: "CAAATCACTGAGATTGTTTCATGTGTACACTTTGGTAAAAATGTTATATAGAGAGTATCTAAGACTTGTCACACTATCACTAAAGATGTTTAAGTATCTTTTAATATCAGACTTCAACTCTAAACAACGGGCTATTCTGGCATCGATGTTGGAGGCTGGGGTCTGGCTTTGGTGACTTTGATGCCCAGTGCTATTGCAATGTCTGTGGATGTGGCAGATTCTGCAGAGCAGGATATGGATATGACTCTGGGTATGGTGGTTATGGATACAATGCTGCCACCCAGATTGTTATGGAAGATACTGGGCCTCTGCTTTCTACTCGGAGTTGGGACCTAAGATTCTTGGGAAAATGATCCAATAACAAAATACAACTCTTCAAATGTTGTGTCCTTTCAAATATATCCCCCGCTCATAGCAGGCAGGGAAGATGAATTACTGGCTTTACAAGCTTG" },
+                { header: ">NG_000941.3 Homo sapiens keratin associated protein 3-4, pseudogene (KRTAP3-4P) on chromosome 17", sequence: "TGTTCCCTGAGATAGGTGGATATAAAAGACCCATAGAGGACAACCTTGTAGAAGAAAGCCTTCCTTTGCCACAAAACATTGTCCTGGTCCACTGTCACTATGTCTTGCTGTGATTCCTATCTCCAAGGATGCTGCAGCGTCCCCACTGGCCTGGCCACCACTATCTGCCCCTCTGACATAAGCTGTCAATGTGAAGTCTGCCTACCCAGCACCTGTCCTCATGAGATCAGCCTCCTTCAGCCCACCTGCTGTGAACCTGGCCCCTGCCTGGCTGCATGCCTGACTCCTATGTGCCATCCTGTTGACTGCTCAACAAATGCCACCCAGCTCCAACCCTGAGCGGGCTCTCTGTCACCACCTGCATCCAGAGTGTGAACCACCTTGCTGCTAGCCAAAGAGCTTGCCCACATTACCCTGAGGACCTTCAGTAGTCATTAAGC" },
+                { header: ">NG_002671.3 Homo sapiens keratin associated protein 19-11, pseudogene (KRTAP19-11P) on chromosome 21", sequence: "ACACCCTTTTCTGAGGTATGCAAGAGTTCCTGGGCACATGATGTCATTTACACTTCCGAAACACAGCTTTATCGTCAAACAAAATCCCCACTCTTGATACCATGAGCTGCTACTACAACCAGGGCCTGGACTATGGCTATAGCTTGGACTATGGTCTGGCTATGGAGGCTATGCATATGGCTCTGACAGACATTATGCTATGGAGAATATGGATTCTCTGGATTCTATTGAAAAGGAAAAATTACCTTGGTGCTTTGGGACATTGGAATCTAGGTATCACCCTACTGTTAATTTTCTCAAGATCAACAACAGCACTTCATTCCATGACATGATTGCAGATTTCACAAATTGGGTCACTTCTGACATTTCTGTGCCAATTTTTAAGAAAGCTATTTTCTTTGAATGACAAAGTCCACTCCAAATTTATTTCA" }
+            ];
+
+            // Convert sequences into FASTA format
+            let fastaContent = sampleSequences.map(seq => `>${seq.header}\n${seq.sequence}`).join("\n");
+
+            // Create a Blob and trigger the download
+            const blob = new Blob([fastaContent], { type: "text/plain" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "sample_sequences.fasta";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+
+        function handleFastaUpload(event) {
+            const file = event.target.files[0]; // Get the uploaded file
+            if (!file) {
+                showAlert("Please select a valid FASTA file.<br>Click the Reset button to start again.");
+                return;
+            }
+        
+            const reader = new FileReader(); // FileReader to read file contents
+            reader.onload = function (e) {
+                const text = e.target.result;
+                const sequences = parseFasta(text);
+                if (sequences.length < 5) {
+                    showAlert("Please upload a FASTA file containing at least 5 sequences.<br>Click the Reset button to start again.");
+                    return;
+                }
+            
+                // Display the parsed sequences in the textarea
+                document.getElementById("sequences").value = sequences.join("\n");
+            };
+            reader.readAsText(file);
+        }
+
+        function parseFasta(fastaText) {
+            const sequences = [];
+            let currentSequence = "";
+
+            const lines = fastaText.split("\n");
+            for (let line of lines) {
+                line = line.trim();
+                if (line.startsWith(">")) { // FASTA headers start with ">"
+                    if (currentSequence) {
+                        sequences.push(currentSequence);
+                        currentSequence = "";
+                    }
+                } else {
+                    currentSequence += line; // Concatenate sequence lines
+                }
+            }
+            if (currentSequence) sequences.push(currentSequence); // Add last sequence
+        
+            return sequences;
+        }
+
+        let globalTransitionMatrix = null;
+        let globalEmissionMatrix = null;
+        let globalInitialProbabilities = null;
+
+        function showAlert(message) {
+            document.getElementById("alert-message").innerHTML = message;
+            document.getElementById("custom-alert").style.display = "block";
+        }
+
+        function hideAlert() {
+            document.getElementById("custom-alert").style.display = "none";
+        }
+
+        function validateSequences(sequences) {
+            const validCharacters = /^[AGTCU]+$/i;
+            for (const seq of sequences) {
+                if (!validCharacters.test(seq)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function resetAll() {
+            // Clear input fields
+            document.getElementById("sequences").value = "";
+
+            // Clear output sections
+            document.getElementById("output").innerHTML = "";
+            document.getElementById("calculationOutput").innerHTML = "";
+            document.getElementById("reestimateOutput").innerHTML = "";
+            document.getElementById("viterbiOutput").innerHTML = "";
+
+            // Hide calculation sections
+            document.getElementById("calculationSection").style.display = "none";
+            document.getElementById("reestimateSection").style.display = "none";
+            document.getElementById("viterbiSection").style.display = "none";
+
+            // Reset global variables
+            globalTransitionMatrix = null;
+            globalEmissionMatrix = null;
+            globalInitialProbabilities = null;
+
+            // Reset buttons (disable all except the first one)
+            const buttonIds = ["start-analysis-btn", "forward-backward-btn", "reestimate-btn", "viterbi-btn"];
+            buttonIds.forEach((id, index) => {
+                let button = document.getElementById(id);
+                if (button) {
+                    button.disabled = index !== 0; // Only enable the first button
+                    button.classList.toggle("enabled", index === 0);
+                }
+            });
+        }
+        
+        function downloadSampleQueryFasta() {
+            // Define the sample query sequence
+            const sampleQuery = {
+            header: ">NG_044217.1 Homo sapiens keratin 19 pseudogene 6 (KRT19P6) on chromosome 4",
+            sequence: "GAGACTGTTTGAGATATGACTTAATTACCTTGCACCTCCATTTGCACTTCCTTAAATATGTTTAATCATAATTTTCAAATATCATTCTCAATTTCAAATTCTCAAATATCATTAATTTCTTTCTTGAAATAAAATATTTATGAAGCCCAGCTGGGTAATATGTGCGTTGACAGCGAGAGGCAGAACAAGGAGTACCAGGGGGTTATGGACTTCACCTCACAGCTGGAGTAGGAGATCTCTCTGTATTGCAACCAGCTAGAAGGCCAGGAATATTGCTACAACAACCTGCCCAACTCCAAGGTCCTCTGAGTGGCAGGCTCCTGGGTTTCTGCTCTCCTTCAGGGGGAGTCCCTGGGTTGGGGAATAGGAATTGAAGGACCCTTACCTCTGGCTCTTCACTGACCTGCCA"
+            };
+
+            // Convert to FASTA format
+            let fastaContent = `>${sampleQuery.header}\n${sampleQuery.sequence}`;
+
+            // Create a Blob and trigger the download
+            const blob = new Blob([fastaContent], { type: "text/plain" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "sample_query.fasta";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        
+        function handleQueryFastaUpload(event) {
+            const file = event.target.files[0]; // Get the uploaded file
+            if (!file) {
+                showAlert("Please select a valid FASTA file.<br>Click the Reset button to start again.");
+                return;
+            }
+        
+            const reader = new FileReader(); // FileReader to read the file
+            reader.onload = function (e) {
+                const text = e.target.result;
+                const sequences = parseFasta(text);
+
+                if (sequences.length !== 1) {
+                    showAlert("Please upload a FASTA file with exactly one query sequence.<br>Click the Reset button to start again.");
+                    return;
+                }
+            
+                // Display the parsed query sequence in the input box
+                document.getElementById("querySequence").value = sequences[0];
+            };
+            reader.readAsText(file);
+        }
+
+        // Function to parse FASTA files 
+        function parseFasta(fastaText) {
+            const sequences = [];
+            let currentSequence = "";
+
+            const lines = fastaText.split("\n");
+            for (let line of lines) {
+                line = line.trim();
+                if (line.startsWith(">")) { // Ignore headers, only extract sequences
+                    if (currentSequence) {
+                        sequences.push(currentSequence);
+                        currentSequence = "";
+                    }
+                } else {
+                    currentSequence += line; // Concatenate sequence lines
+                }
+            }
+            if (currentSequence) sequences.push(currentSequence); // Add last sequence
+        
+            return sequences;
+        }
+
+
+        function resetQuerySequence() {
+            document.getElementById('querySequence').value = '';
+            document.getElementById('viterbiOutput').innerHTML = '';
+        }
+
+        function startAnalysis() {
+            showAlert("This tool is best used for desktop view or landscape mode in phones");
+
+            setTimeout(() => {
+                const sequences = document.getElementById('sequences').value.trim().split('\n').map(seq => seq.toUpperCase());
+
+                // Check sequences valid
+                if (sequences.length !== 5 || !validateSequences(sequences)) {
+                    showAlert('Please provide exactly 5 valid nucleotide sequences containing only "A", "G", "T", "C", "U".<br>Click the Reset button to start again.');
+                    return; // Stop if input is invalid
+                }
+            
+                // validation pass: proceed with the next steps
+                showAlert("Step 1: Generated assumed HMM parameters:<br>Initialization, Transition, and Emission probabilities (refer to HMM parameters).<br><b>Proceed to calculate Forward-Backward values next.</b>");
+            
+                setTimeout(() => {
+                    scrollToSection("output");
+                }, 2000);
+
+                const { transitionMatrix, emissionMatrix, initialProbabilities } = generateParameters(sequences);
+                globalTransitionMatrix = transitionMatrix;
+                globalEmissionMatrix = emissionMatrix;
+                globalInitialProbabilities = initialProbabilities;
+
+                displayResults(globalTransitionMatrix, globalEmissionMatrix, globalInitialProbabilities);
+
+                document.getElementById('calculationSection').style.display = 'block';
+                document.getElementById('reestimateSection').style.display = 'block';
+                if (step === 3) {
+                    document.getElementById('viterbiSection').style.display = 'block';
+                }        
+            }, 1500);
+        }
+
+        function generateParameters(sequences) {
+            const states = ['Exon', 'Intron'];
+            const nucleotides = ['A', 'G', 'T', 'C'];
+
+            const transitionMatrix = [
+                [0.7, 0.3],
+                [0.4, 0.6]
+            ];
+
+            const emissionMatrix = [
+                [0.6, 0.2, 0.6, 0.2],
+                [0.2, 0.6, 0.2, 0.6]
+            ];
+
+            const initialProbabilities = [0.5, 0.5];
+
+            return { transitionMatrix, emissionMatrix, initialProbabilities };
+        }
+
+        function displayResults(transitionMatrix, emissionMatrix, initialProbabilities) {
+            const output = document.getElementById('output');
+            output.innerHTML = `
+                <h2>Assumed Parameters</h2>
+                <p><strong>Initial Probabilities:</strong>
+                </p>${renderMatrix([initialProbabilities], [''], ['Exon', 'Intron'])}
+                <p><strong>Transition Matrix:</strong>
+                </p>${renderMatrix(transitionMatrix, ['Exon', 'Intron'], ['Exon', 'Intron'])}
+                <p><strong>Emission Matrix:</strong>
+                </p>${renderMatrix(emissionMatrix, ['Exon', 'Intron'], ['A', 'G', 'T', 'C'])}
+            `;
+        }
+
+        function renderMatrix(matrix, rowLabels, colLabels) {
+            let html = '<table><tr><th></th>';
+            colLabels.forEach(label => html += `<th>${label}</th>`);
+            html += '</tr>';
+            matrix.forEach((row, rowIndex) => {
+                html += `<tr><th>${rowLabels[rowIndex]}</th>`;
+                row.forEach(cell => {
+                    let formattedCell = (typeof cell === "number") ? cell.toFixed(4) : cell;
+                    html += `<td>${formattedCell}</td>`;
+                });
+                html += '</tr>';
+            });
+            html += '</table>';
+            return html;
+        }
+        
+        function renderEetaScrollableTable(eeta) {
+            if (!eeta || eeta.length === 0) {
+                return '<p>No Eeta values available.</p>';
+            }
+        
+            const tableRows = eeta
+                .map((row, index) => `
+                    <tr>
+                        <td>${index + 1}-${index + 2}</td>
+                        ${row.flatMap(innerRow => innerRow.map(value => `<td>${value.toFixed(4)}</td>`)).join('')}
+                    </tr>
+                `)
+                .join('');
+                
+            return `
+                <div class="eeta-scrollable-container">
+                    <table class="eeta-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">Transition</th>
+                                <th colspan="2">(From) Intron</th>
+                                <th colspan="2">(From) Exon</th>
+                            </tr>
+                            <tr>
+                                <th>(To) Intron</th>
+                                <th>(To) Exon</th>
+                                <th>(To) Intron</th>
+                                <th>(To) Exon</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${tableRows}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+
+        function calculateForwardBackward() {
+            
+            const sequence = document.getElementById('sequences').value.trim().split('\n')[0].toUpperCase();
+
+            if (!sequence || !validateSequences([sequence])) {
+                showAlert('Please ensure the first sequence is valid and contains only "A", "G", "T", "C", "U".');
+                return;
+            }
+
+            const Output = document.getElementById("output").innerHTML.trim();
+
+            if (!Output) {
+                showAlert("Error: You must generate assumed parameters before calculating Forward-Backward values.");
+                return;
+            }
+
+            showAlert("Step 2: Calculated forward and backward porbability values.<br><b>Proceed to re-estimate HMM parameters next.</b>");
+
+            setTimeout(() => {
+                scrollToSection("output");
+            }, 2000);
+
+            const forwardValues = calculateForward(sequence, globalTransitionMatrix, globalEmissionMatrix, globalInitialProbabilities);
+            const backwardValues = calculateBackward(sequence, globalTransitionMatrix, globalEmissionMatrix);
+
+            displayForwardBackward(forwardValues, backwardValues);
+            
+        }
+
+        function calculateForward(sequence, transitionMatrix, emissionMatrix, initialProbabilities) {
+            const states = ['Exon', 'Intron'];
+            const seqLength = sequence.length;
+            const forward = Array.from({ length: seqLength }, () => Array(states.length).fill(0));
+
+            let sum = 0;
+            for (let i = 0; i < states.length; i++) {
+                forward[0][i] = initialProbabilities[i] * emissionMatrix[i][nucleotideToIndex(sequence[0])];
+                sum += forward[0][i];
+            }
+
+            const scalingFactors = Array(seqLength).fill(1);
+            if (sum > 0) {
+                scalingFactors[0] = sum;
+                for (let i = 0; i < states.length; i++) {
+                    forward[0][i] /= sum; // Normalize
+                }
+            }
+
+            for (let t = 1; t < seqLength; t++) {
+                sum = 0;
+                for (let j = 0; j < states.length; j++) {
+                    forward[t][j] = states.reduce((total, _, i) => total + forward[t - 1][i] * transitionMatrix[i][j], 0) * emissionMatrix[j][nucleotideToIndex(sequence[t])];
+                    sum += forward[t][j];
+                }
+            
+                // ✅ Normalize
+                if (sum > 0) {
+                    scalingFactors[t] = sum;
+                    for (let j = 0; j < states.length; j++) {
+                        forward[t][j] /= sum;
+                    }
+                }
+            }
+
+            return forward;
+        }
+
+        function calculateBackward(sequence, transitionMatrix, emissionMatrix) {
+            const states = ['Exon', 'Intron'];
+            const seqLength = sequence.length;
+            const backward = Array.from({ length: seqLength }, () => Array(states.length).fill(0));
+
+            for (let i = 0; i < states.length; i++) {
+                backward[seqLength - 1][i] = 1;
+            }
+
+            const scalingFactors = Array(seqLength).fill(1);
+
+                    for (let t = seqLength - 2; t >= 0; t--) {
+                let sum = 0;
+                for (let i = 0; i < states.length; i++) {
+                    let value = 0;
+                    for (let j = 0; j < states.length; j++) {
+                        value += transitionMatrix[i][j] * emissionMatrix[j][nucleotideToIndex(sequence[t + 1])] * backward[t + 1][j];
+                    }
+                    backward[t][i] = value;
+                    sum += value;
+                }
+            
+                // ✅ Normalize (Scaling Step)
+                if (sum > 0) {
+                    scalingFactors[t] = sum;
+                    for (let i = 0; i < states.length; i++) {
+                        backward[t][i] /= sum; // Normalize to prevent underflow
+                    }
+                }
+            }
+
+            return backward;
+        }
+
+        function displayForwardBackward(forward, backward) {
+            const output = document.getElementById('calculationOutput');
+
+            // Render Forward table in a scrollable container
+            const forwardTable = `
+                <div class="scrollable-table">
+                    ${renderMatrix(
+                        forward,
+                        Array.from({ length: forward.length }, (_, i) => `t${i}`),
+                        ['Exon', 'Intron']
+                    )}
+                </div>
+            `;
+            
+            // Render Backward table in a scrollable container
+            const backwardTable = `
+                <div class="scrollable-table">
+                    ${renderMatrix(
+                        backward,
+                        Array.from({ length: backward.length }, (_, i) => `t${i}`),
+                        ['Exon', 'Intron']
+                    )}
+                </div>
+            `;
+            
+            output.innerHTML = `
+                <h2>Forward and Backward Values</h2>
+                <p><strong>Forward Values:</strong></p>
+                ${forwardTable}
+                <p><strong>Backward Values:</strong></p>
+                ${backwardTable}
+            `;
+        }
+
+        function nucleotideToIndex(nucleotide) {
+            const map = { 'A': 0, 'G': 1, 'T': 2, 'C': 3 };
+            return map[nucleotide] || 0;
+        }
+
+        function reestimateParameters() {
+            console.log("Re-estimate button clicked!");
+
+            showAlert("Step 3: Re-estimated HMM Parameters.<br><b>Proceed to prediction with Viterbi next.</b>");
+            document.getElementById('viterbiSection').style.display = 'block';
+
+            setTimeout(() => {
+                scrollToSection("output");
+            }, 2000);
+
+            const calculationOutput = document.getElementById("calculationOutput").innerHTML.trim();
+
+            if (!calculationOutput) {
+                showAlert("Error: You must calculate Forward-Backward values before re-estimating parameters.");
+                return;
+            }
+    
+            const sequence = document.getElementById('sequences').value.trim().split('\n')[0].toUpperCase();
+
+            if (!sequence || !validateSequences([sequence])) {
+                showAlert('Please ensure the first sequence is valid and contains only "A", "G", "T", "C", "U".<br>Click the Reset button to start again.');
+                return;
+            }
+        
+            console.log("Sequence validated:", sequence);
+        
+            const forwardValues = calculateForward(sequence, globalTransitionMatrix, globalEmissionMatrix, globalInitialProbabilities);
+            console.log("Forward values calculated:", forwardValues);
+        
+            const backwardValues = calculateBackward(sequence, globalTransitionMatrix, globalEmissionMatrix);
+            console.log("Backward values calculated:", backwardValues);
+        
+            const { gamma, eeta } = calculateGammaEeta(sequence, forwardValues, backwardValues, globalTransitionMatrix, globalEmissionMatrix);
+            console.log("Gamma and Eeta calculated:", gamma, eeta);
+        
+            const { reestimatedTransitionMatrix, reestimatedEmissionMatrix, reestimatedInitialProbabilities } = baumWelch(sequence, gamma, eeta);
+            console.log("Re-estimated parameters computed:", reestimatedTransitionMatrix, reestimatedEmissionMatrix, reestimatedInitialProbabilities);
+        
+
+            displayReestimation(gamma, eeta, reestimatedTransitionMatrix, reestimatedEmissionMatrix, reestimatedInitialProbabilities);
+
+            console.log("Re-estimation displayed!");
+        }
+
+        function calculateGammaEeta(sequence, forward, backward, transitionMatrix, emissionMatrix) {
+            const states = ['Exon', 'Intron'];
+            const seqLength = sequence.length;
+            const gamma = Array.from({ length: seqLength }, () => Array(states.length).fill(0));
+            const eeta = Array.from({ length: seqLength - 1 }, () => Array(states.length).fill(0).map(() => Array(states.length).fill(0)));
+
+            for (let t = 0; t < seqLength; t++) {
+                const normalizationFactor = states.reduce((sum, _, i) => sum + forward[t][i] * backward[t][i], 0);
+                for (let i = 0; i < states.length; i++) {
+                    gamma[t][i] = (forward[t][i] * backward[t][i]) / normalizationFactor;
+                }
+            }
+
+            for (let t = 0; t < seqLength - 1; t++) {
+                const normalizationFactor = states.reduce((sum, _, i) => sum + states.reduce((innerSum, _, j) => innerSum + forward[t][i] * transitionMatrix[i][j] * emissionMatrix[j][nucleotideToIndex(sequence[t + 1])] * backward[t + 1][j], 0), 0);
+                for (let i = 0; i < states.length; i++) {
+                    for (let j = 0; j < states.length; j++) {
+                        eeta[t][i][j] = (forward[t][i] * transitionMatrix[i][j] * emissionMatrix[j][nucleotideToIndex(sequence[t + 1])] * backward[t + 1][j]) / normalizationFactor;
+                    }
+                }
+            }
+
+            return { gamma, eeta };
+        }
+
+        function baumWelch(sequence, gamma, eeta) {
+            const states = ['Exon', 'Intron'];
+            const nucleotides = ['A', 'G', 'T', 'C'];
+            const seqLength = sequence.length;
+
+            const reestimatedInitialProbabilities = gamma[0];
+
+            const reestimatedTransitionMatrix = states.map((_, i) => states.map((_, j) => {
+                const numerator = Array.from({ length: seqLength - 1 }, (_, t) => eeta[t][i][j]).reduce((sum, val) => sum + val, 0);
+                const denominator = Array.from({ length: seqLength - 1 }, (_, t) => gamma[t][i]).reduce((sum, val) => sum + val, 0);
+                return numerator / denominator;
+            }));
+
+            const reestimatedEmissionMatrix = states.map((_, i) => nucleotides.map((nucleotide, k) => {
+                const numerator = Array.from({ length: seqLength }, (_, t) => sequence[t] === nucleotide ? gamma[t][i] : 0).reduce((sum, val) => sum + val, 0);
+                const denominator = Array.from({ length: seqLength }, (_, t) => gamma[t][i]).reduce((sum, val) => sum + val, 0);
+                return numerator / denominator;
+            }));
+
+            return { reestimatedTransitionMatrix, reestimatedEmissionMatrix, reestimatedInitialProbabilities };
+        }
+
+        function displayReestimation(gamma, eeta, transitionMatrix, emissionMatrix, initialProbabilities) {
+            const output = document.getElementById('reestimateOutput');
+            output.innerHTML = "";
+
+            // Render Gamma values
+            const gammaTable = `
+                <div class="scrollable-table">
+                    ${renderMatrix(
+                        gamma,
+                        Array.from({ length: gamma.length }, (_, i) => `t${i}`),
+                        ['Exon', 'Intron']
+                    )}
+                </div>
+            `;
+            
+            // Render Eeta values
+            const eetaTable = renderEetaScrollableTable(eeta);
+            
+            output.innerHTML = `
+                <h2>Re-estimated Parameters</h2>
+                <p><strong>Gamma Values:</strong></p>
+                ${gammaTable}
+                <p><strong>Eeta Values:</strong></p>
+                ${eetaTable}
+                <p><strong>Re-estimated Transition Matrix:</strong></p>
+                ${renderMatrix(transitionMatrix, ['Exon', 'Intron'], ['Exon', 'Intron'])}
+                <p><strong>Re-estimated Emission Matrix:</strong></p>
+                ${renderMatrix(emissionMatrix, ['Exon', 'Intron'], ['A', 'G', 'T', 'C'])}
+                <p><strong>Re-estimated Initial Probabilities:</strong></p>
+                ${renderMatrix([initialProbabilities], [''], ['Exon', 'Intron'])}
+            `;
+                
+            // Update global parameters
+            globalTransitionMatrix = transitionMatrix;
+            globalEmissionMatrix = emissionMatrix;
+            globalInitialProbabilities = initialProbabilities;
+        }
+
+        function runViterbiQuery() {
+
+            const query = document.getElementById('querySequence').value.replace(/\s+/g, '').toUpperCase();
+
+            if (!validateSequences([query])) {
+                showAlert('Please enter a valid nucleotide sequence containing only "A", "G", "T", "C", "U".<br>Click the Reset button to start again.');
+                return;
+            }
+        
+            const reestimateOutput = document.getElementById("reestimateOutput").innerHTML.trim();
+
+            if (!reestimateOutput) {
+                showAlert("Error: You must re-estimate parameters before running Viterbi.");
+                return;
+            }
+        
+            const result = runViterbi(query, globalTransitionMatrix, globalEmissionMatrix, globalInitialProbabilities);
+            displayViterbiResult(result, query);
+        }
+
+        function runViterbi(query, transitionMatrix, emissionMatrix, initialProbabilities) {
+            const states = ['Exon', 'Intron'];
+            const sequenceLength = query.length;
+
+            // Initialize the dynamic programming table and backpointer
+            const dp = Array.from({ length: sequenceLength }, () => Array(states.length).fill(-Infinity));
+            const backpointer = Array.from({ length: sequenceLength }, () => Array(states.length).fill(null));
+
+            // Base case: Initialization
+            for (let i = 0; i < states.length; i++) {
+                const nucleotideIndex = nucleotideToIndex(query[0]);
+                dp[0][i] = Math.log(initialProbabilities[i]) + Math.log(emissionMatrix[i][nucleotideIndex]);
+            }
+        
+            // Recursive case: Fill the DP table
+            for (let t = 1; t < sequenceLength; t++) {
+                for (let i = 0; i < states.length; i++) {
+                    const nucleotideIndex = nucleotideToIndex(query[t]);
+                    for (let j = 0; j < states.length; j++) {
+                        const prob = dp[t - 1][j] + Math.log(transitionMatrix[j][i]) + Math.log(emissionMatrix[i][nucleotideIndex]);
+                        if (prob > dp[t][i]) {
+                            dp[t][i] = prob;
+                            backpointer[t][i] = j;
+                        }
+                    }
+                }
+            }
+        
+            // Termination: Find the best path probability
+            let maxProb = -Infinity;
+            let bestState = null;
+            for (let i = 0; i < states.length; i++) {
+                if (dp[sequenceLength - 1][i] > maxProb) {
+                    maxProb = dp[sequenceLength - 1][i];
+                    bestState = i;
+                }
+            }
+        
+            // Backtrack to find the best path
+            const path = [];
+            for (let t = sequenceLength - 1; t >= 0; t--) {
+                path.unshift(states[bestState]);
+                bestState = backpointer[t][bestState];
+            }
+        
+            return { probability: Math.exp(maxProb), path };
+        }
+
+        function displayViterbiResult(result, query) {
+            const viterbiOutput = document.getElementById('viterbiOutput');
+
+            let graphicalOutput = '<div class="viterbi-graph">';
+            for (let i = 0; i < query.length; i++) {
+                const nucleotide = query[i];
+                const state = result.path[i];
+                const stateClass = state === 'Exon' ? 'exon' : 'intron';
+
+                graphicalOutput += `
+                    <span class="viterbi-box ${stateClass}" data-tooltip="Position: ${i + 1} | Nucleotide: ${nucleotide} | State: ${state}">
+                        ${nucleotide}
+                    </span>
+                `;
+            }
+            graphicalOutput += '</div>';
+
+            viterbiOutput.innerHTML = `
+                <h2>Viterbi Algorithm Result</h2>
+                <p><strong>Probability:</strong> ${result.probability}</p>
+                <p><strong>Graphical Representation:</strong></p>
+                ${graphicalOutput}
+                <p class="viterbi-note">Note: The viterbi algorithm's calculation involves a multi-fold multiplication which results in extremely small values, hence the displayed value is expressed in terms of 'e'.
+                <br> In reality, the number of introns is far more greater than the number of exons. However, this is not shown here as a result of the miniscule data of 5 sequences used.</p>
+                `;
+                const downloadButton = `
+                    <button class="download-btn viterbi" onclick="downloadViterbiSVG()">Download Viterbi Output</button>
+                `;
+                viterbiOutput.innerHTML += downloadButton;
+
+        }
+
+        // Collapsible Instruction Box
+        function toggleInstructions() {
+            const box = document.getElementById("instructionBox");
+            const button = document.querySelector(".collapse-btn");
+
+            if (box.style.display === "none") {
+                box.style.display = "block";
+                button.innerHTML = "Instructions ▼";
+            } else {
+                box.style.display = "none";
+                button.innerHTML = "Instructions ▲";
+            }
+        }
+
+        // Resizable Panels
+        document.addEventListener("DOMContentLoaded", function () {
+            const leftPanel = document.querySelector(".left-panel");
+            const rightPanel = document.querySelector(".right-panel");
+            const resizer = document.createElement("div");
+            resizer.classList.add("resizer");
+            leftPanel.after(resizer);
+        
+            let isResizing = false;
+        
+            resizer.addEventListener("mousedown", function (event) {
+                isResizing = true;
+                document.addEventListener("mousemove", onMouseMove);
+                document.addEventListener("mouseup", onMouseUp);
+            });
+        
+            function onMouseMove(event) {
+                if (!isResizing) return;
+                let newWidth = (event.clientX / window.innerWidth) * 100;
+                if (newWidth > 10 && newWidth < 90) { // Prevent extreme sizes
+                    leftPanel.style.width = `${newWidth}%`;
+                    rightPanel.style.width = `${100 - newWidth}%`;
+                }
+            }
+        
+            function onMouseUp() {
+                isResizing = false;
+                document.removeEventListener("mousemove", onMouseMove);
+                document.removeEventListener("mouseup", onMouseUp);
+            }
+        });
+
+        function downloadViterbiSVG() {
+            const maxCharsPerLine = 60;
+            const lineHeight = 30;
+            const nucleotideSpacing = 18; // Increased spacing for clarity
+
+            const resultText = [...document.querySelectorAll('.viterbi-box')].map(el => ({
+                nucleotide: el.textContent,
+                state: el.classList.contains('exon') ? 'exon' : 'intron'
+            }));
+        
+            if (resultText.length === 0) {
+                alert("No Viterbi result available for download.");
+                return;
+            }
+        
+            const numLines = Math.ceil(resultText.length / maxCharsPerLine);
+            const width = maxCharsPerLine * nucleotideSpacing + 40; // Add padding for aesthetics
+            const height = numLines * lineHeight + 40;
+        
+            let svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" font-family="Courier New, monospace" font-size="20">`;
+            
+            // Background gradient
+            svg += `
+                <defs>
+                    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#f8f8f8; stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#e0e0e0; stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#bgGradient)"/>`;
+            
+            let x = 20, y = 40; // Start with some padding
+            
+            for (let i = 0; i < resultText.length; i++) {
+                const { nucleotide, state } = resultText[i];
+                const color = state === "exon" ? "#228B22" : "#CC0000"; // Exon = green, Intron = red
+            
+                // Plain text without glow effect
+                svg += `<text x="${x}" y="${y}" fill="${color}">${nucleotide}</text>`;
+            
+                x += nucleotideSpacing;
+                if ((i + 1) % maxCharsPerLine === 0) {
+                    x = 20;
+                    y += lineHeight;
+                }
+            }
+        
+            svg += `</svg>`;
+        
+            const blob = new Blob([svg], { type: "image/svg+xml" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "viterbi_output.svg";
+            link.click();
+        }
+
+</script>
+<script src="../assets/js/iframeResize.js"></script>
+        
+        </body>
+</html>
+

@@ -1,0 +1,86 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "1. Choose the model that works with the Viterbi algorithm.",
+      "answers": {
+        "a": "Decision trees",
+        "b": "Hidden Markov Models",
+        "c": "Neural networks",
+        "d": "Linear regression"
+      },
+      
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },  
+
+    {
+      "question": "2. The approach used in the Viterbi algorithm ?",
+      "answers": {
+        "a": "Brute-force",
+        "b": "Backtracking",
+        "c": "Dynamic programming",
+        "d": "Linear regression"
+      },
+      
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    
+    
+    {
+      "question": "3. In a Hidden Markov Model (HMM), the components used by the Viterbi algorithm?",
+      "answers": {
+        "a": "Transition probabilities",
+        "b": "Emission probabilities",
+        "c": "Initial state probabilities",
+        "d": "All the above"
+      },
+      
+      "correctAnswer": "d",
+      "difficulty": "beginner"
+    },
+
+    {
+      "question": "4. Choose the application (s) of the Viterbi algorithm.",
+      "answers": {
+        "a": "DNA sequence analysis",
+        "b": "Phylogenetic tree construction",
+        "c": "Amino acid sequence prediction",
+        "d": "Protein structure prediction"
+      },
+      
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    }, 
+
+
+
+    {
+      "question": "5. Which of the following best defines exons in a sequence?",
+      "answers": {
+        "a": "Non-coding regions",
+        "b": "Coding regions",
+        "c": "Absent in mature RNA",
+        "d": "Not translated to proteins"
+      },
+      
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    
+    
+    {
+      "question": "6. The entities in Hidden Markov Models",
+      "answers": {
+        "a": "Only Observables",
+        "b": "Only hidden states",
+        "c": "Both observables and hidden states",
+        "d": "Neither observables nor hidden states"
+      },
+      
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    }
+  ]
+}
